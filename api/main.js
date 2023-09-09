@@ -16,3 +16,7 @@ export function getHistoryTrend(monitor, monitorType, tableType, start, end) {
   // start, end 開始和結束時間, 以 Epoch 開始的 ms 表示時間
   return slgescApi.get(`HistoryTrend/${monitor}/${monitorType}/${tableType}/${start}/${end}`);
 }
+
+export function getConsumptionCompare() {
+  return slgescApi.get('ConsumptionCompare');
+}
