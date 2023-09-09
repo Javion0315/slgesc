@@ -1,26 +1,36 @@
 <template>
-  <div
-    class="bg-gray-800 border-b border-gray-400 p-4 flex justify-start items-center"
-  >
-    <font-awesome-icon
-      class="mr-4 cursor-pointer"
-      :icon="['fas', 'bars']"
-      size="lg"
-      @click="toggle"
-    />
-    <div>沙崙能源管理系統</div>
-  </div>
+	<div
+		class="bg-neutral-800 border-b border-gray-400 p-4 flex justify-start items-center text-lg"
+	>
+		<font-awesome-icon
+			class="mr-4 cursor-pointer"
+			:icon="['fas', 'bars']"
+			size="lg"
+			@click="toggle"
+		/>
+		<!-- <img width="50" src="@/assets/images/logo.svg" alt="logo" /> -->
+		<div>沙崙能源管理系統</div>
+	</div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
-  methods: {
-    ...mapMutations(["toggle"]),
-  },
-  computed: {
-    ...mapGetters(["getToggleState"]),
-  },
+	mounted() {
+		this.onScreenResize();
+	},
+	methods: {
+		...mapMutations(["toggle"]),
+		onScreenResize() {
+			window.addEventListener("resize", () => {
+				if (window.innerWidth <= 840) {
+					this.$store.dispatch("setMenu", false);
+				} else {
+					this.$store.dispatch("setMenu", true);
+				}
+			});
+		},
+	},
 };
 </script>

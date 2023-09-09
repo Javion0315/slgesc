@@ -14,21 +14,21 @@ const slgescApi = axios.create({
 
 
 
-slgescApi.interceptors.response.use(
-  response => response,
-  // (error) => {
-  //   if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
-  //     $nuxt.$toast.show({
-  //       message: `連線失敗，請您重新進行交易`,
-  //       classToast: "bg-red-500",
-  //     })
-  //   }
-  //   if (error.response.status === 401) {
-  //     $nuxt.$router.push({name: 'timeout'})
-  //   } else {
-  //     return Promise.reject(error);
-  //   }
-  // }
-);
+// slgescApi.interceptors.response.use(
+//   response => response,
+//   (error) => {
+//     if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
+//       $nuxt.$toast.show({
+//         message: `連線失敗，請您重新進行交易`,
+//         classToast: "bg-red-500",
+//       })
+//     }
+//     if (error.response.status === 401) {
+//       $nuxt.$router.push({name: 'timeout'})
+//     } else {
+//       return Promise.reject(error);
+//     }
+//   }
+// );
 
 export { slgescApi }

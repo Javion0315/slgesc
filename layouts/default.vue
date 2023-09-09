@@ -1,10 +1,21 @@
 <template>
-  <div class="bg-slate-900 text-white min-h-screen">
-    <div>
-      <Navbar />
-      <main>
-        <Nuxt />
-      </main>
-    </div>
-  </div>
+	<div class="bg-neutral-950 text-white min-h-screen">
+		<div>
+			<Navbar />
+			<main class="flex">
+				<Sidebar v-if="getToggleState" />
+				<Nuxt />
+			</main>
+		</div>
+	</div>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+	computed: {
+		...mapGetters(["getToggleState"]),
+	},
+};
+</script>

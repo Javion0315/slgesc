@@ -41,7 +41,7 @@ export default {
   modules: [
     'nuxt-fontawesome',
   ],
-  
+
 
   fontawesome: {
     component: 'fa',

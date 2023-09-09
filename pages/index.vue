@@ -1,7 +1,20 @@
 <template>
-  <div>123dddd</div>
+	<div></div>
 </template>
 
 <script>
-export default {};
+import { getWeatherReport } from "~/api/main";
+
+export default {
+	mounted() {
+		this.init();
+	},
+	methods: {
+		init() {
+			getWeatherReport().then((res) => {
+				console.log(res);
+			});
+		},
+	},
+};
 </script>
