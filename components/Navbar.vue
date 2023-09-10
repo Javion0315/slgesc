@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="bg-neutral-800 border-b border-gray-400 p-4 flex justify-start items-center text-lg"
+		class="bg-dark-black200 border-b border-gray-400 p-4 flex justify-start items-center text-lg"
 	>
 		<font-awesome-icon
 			class="mr-4 cursor-pointer"

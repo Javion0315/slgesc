@@ -1,13 +1,13 @@
 <template>
-	<div class="min-h-screen bg-neutral-900 fixed w-64 z-50">
+	<div class="min-h-screen bg-dark-black100 fixed w-64 z-50">
 		<div
-			class="flex justify-start items-center py-4 pl-6 pr-12 hover:text-dark-green300 cursor-pointer text-base whitespace-nowrap"
+			class="flex justify-start items-center py-4 pl-6 pr-12 hover:text-dark-yellow cursor-pointer text-base whitespace-nowrap"
 			v-for="item in menuList"
 			:key="item.value"
 			@click="goPath(item)"
 			:class="
 				menuActived === item.value
-					? 'text-dark-green300 border-r-4 border-dark-green300'
+					? 'text-dark-yellow200 border-r-4 border-dark-yellow200'
 					: 'text-neutral-300'
 			"
 		>

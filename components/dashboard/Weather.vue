@@ -1,6 +1,6 @@
 <template>
 	<div class="mt-4">
-		<div class="bg-neutral-800 px-6 py-4 rounded-lg">
+		<div class="bg-dark-black200 px-6 py-4 rounded-lg">
 			<div class="text-2xl">
 				{{ locat }}
 			</div>

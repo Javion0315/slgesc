@@ -1,13 +1,13 @@
 <template>
 	<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
 		<div
-			class="bg-neutral-800 p-1 rounded-lg"
+			class="bg-dark-black200 p-1 rounded-lg text-neutral-100"
 			v-for="(item, index) in statusList"
 			:key="index"
 		>
 			<div class="relative">
 				<img class="w-full" src="@/assets/images/chart.png" alt="chart" />
-				<div class="absolute top-3 left-0 py-2 px-4">
+				<div class="absolute top-1 left-0 py-2 px-4">
 					<div>
 						{{ item.label }}
 					</div>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getRealtimeStatus, getConsumptionCompare } from "~/api/main";
+import { getRealtimeStatus } from "~/api/main";
 
 export default {
 	data() {
