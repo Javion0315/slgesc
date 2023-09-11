@@ -7,7 +7,7 @@
 			<div class="mt-1">
 				{{ desc }}
 			</div>
-			<div class="flex justify-between items-center gap-10 mb-2 mt-3">
+			<div class="flex justify-between items-center gap-10 mb-1 mt-2">
 				<div class="text-3xl">{{ temp }}°C</div>
 				<div v-if="icon">
 					<img
