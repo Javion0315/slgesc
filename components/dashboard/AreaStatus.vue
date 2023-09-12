@@ -7,7 +7,7 @@
 		>
 			<div class="relative">
 				<img class="w-full" src="@/assets/images/chart.png" alt="chart" />
-				<div class="absolute top-1 left-0 py-2 px-4">
+				<div class="absolute top-3 left-0 py-2 px-4">
 					<div>
 						{{ item.label }}
 					</div>
@@ -24,18 +24,27 @@
 </template>
 
 <script>
-import { getRealtimeStatus } from "~/api/main";
-
 export default {
+	props: {
+		realtimeStatus: {
+			type: Array,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			statusList: {},
 		};
 	},
 	mounted() {
-		// generating: 發電量, consuming: 用電量
-		getRealtimeStatus().then((res) => {
-			let data = res.data.summary;
+		setTimeout(() => {
+			this.getData();
+		}, 500);
+	},
+	methods: {
+		// generating: 發電量, consuming: 用電量, consumingPercent: 契約容量占比
+		getData() {
+			let data = this.realtimeStatus;
 			if (data) {
 				let generating = 0;
 				let consuming = 0;
@@ -60,13 +69,17 @@ export default {
 						icon: ["fas", "solar-panel"],
 					},
 					{
-						label: "備轉容量率",
-						value: 0 + " (%)",
+						label: "備轉容量率", // 備轉容量 => 各區用電量/契約容量
+						value:
+							(
+								(consuming / (1200 + 790 + 1000 + 150 + 2400 + 3500 + 200)) *
+								100
+							).toFixed(0) + " (%)",
 						icon: ["fas", "car-battery"],
 					},
 				];
 			}
-		});
+		},
 	},
 };
 </script>

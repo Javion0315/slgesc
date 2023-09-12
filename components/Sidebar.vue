@@ -1,18 +1,20 @@
 <template>
-	<div class="min-h-screen bg-dark-black100 fixed w-64 z-50">
-		<div
-			class="flex justify-start items-center py-4 pl-6 pr-12 hover:text-dark-yellow cursor-pointer text-base whitespace-nowrap"
-			v-for="item in menuList"
-			:key="item.value"
-			@click="goPath(item)"
-			:class="
-				menuActived === item.value
-					? 'text-dark-yellow200 border-r-4 border-dark-yellow200'
-					: 'text-neutral-300'
-			"
-		>
-			<font-awesome-icon :icon="item.icon" size="lg" />
-			<div class="ml-4">{{ item.label }}</div>
+	<div class="absolute inset-0 h-screen top-16 z-50">
+		<div class="bg-dark-black100 w-64 top-0 absolute inset-0 overflow-y-auto">
+			<div
+				class="flex justify-start items-center py-4 pl-6 pr-12 hover:text-dark-yellow cursor-pointer text-base whitespace-nowrap"
+				v-for="item in menuList"
+				:key="item.value"
+				@click="goPath(item)"
+				:class="
+					menuActived === item.value
+						? 'text-dark-yellow200 border-r-4 border-dark-yellow200'
+						: 'text-neutral-300'
+				"
+			>
+				<font-awesome-icon :icon="item.icon" size="lg" />
+				<div class="ml-4">{{ item.label }}</div>
+			</div>
 		</div>
 	</div>
 </template>

@@ -1,16 +1,18 @@
 <template>
-	<div class="bg-dark-black text-white min-h-screen">
+	<div class="bg-dark-black text-white min-h-screen" v-cloak>
 		<div>
 			<Navbar />
-			<main>
-				<Sidebar v-if="getToggleState" />
-				<Nuxt
-					:class="[
-						'p-6',
-						getToggleState && windowWidth >= 840 ? 'ml-64' : 'ml-0',
-					]"
-				/>
-			</main>
+			<div class="flex">
+				<Sidebar class="h-screen sticky top-0" v-if="getToggleState" />
+				<main>
+					<Nuxt
+						:class="[
+							'p-6',
+							getToggleState && windowWidth >= 840 ? 'ml-64' : 'ml-0',
+						]"
+					/>
+				</main>
+			</div>
 		</div>
 	</div>
 </template>

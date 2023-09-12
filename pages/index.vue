@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<DashboardAreaStatus />
+		<DashboardAreaStatus :realtime-status="realtimeStatus" />
 		<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-1 max-lg:gap-0">
 			<DashboardAreaChart class="col-span-3" />
 			<div>
@@ -11,7 +11,34 @@
 				</div>
 			</div>
 		</div>
+		<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-1 max-lg:gap-0">
+			<DashboardConsuming
+				:realtime-status="realtimeStatus"
+				class="col-span-3"
+			/>
+			<DashboardGreenPercent :realtime-status="realtimeStatus" />
+		</div>
 	</div>
 </template>
+
+<script>
+import { getRealtimeStatus } from "~/api/main";
+
+export default {
+	data() {
+		return {
+			realtimeStatus: [],
+		};
+	},
+	created() {
+		getRealtimeStatus().then((res) => {
+			let data = res.data.summary;
+			if (data) {
+				this.realtimeStatus = data;
+			}
+		});
+	},
+};
+</script>
 
 
