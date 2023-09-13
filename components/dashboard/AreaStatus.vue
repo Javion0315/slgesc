@@ -7,7 +7,7 @@
 		>
 			<div class="relative">
 				<img class="w-full" src="@/assets/images/chart.png" alt="chart" />
-				<div class="absolute top-3 left-0 py-2 px-4">
+				<div class="absolute top-1 left-0 py-2 px-4">
 					<div>
 						{{ item.label }}
 					</div>

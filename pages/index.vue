@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<CommonLoading v-if="isLoading" />
 		<DashboardAreaStatus :realtime-status="realtimeStatus" />
 		<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-1 max-lg:gap-0">
 			<DashboardAreaChart class="col-span-3" />
@@ -28,15 +29,21 @@ export default {
 	data() {
 		return {
 			realtimeStatus: [],
+			isLoading: false,
 		};
 	},
 	created() {
-		getRealtimeStatus().then((res) => {
-			let data = res.data.summary;
-			if (data) {
-				this.realtimeStatus = data;
-			}
-		});
+		this.isLoading = true;
+		getRealtimeStatus()
+			.then((res) => {
+				let data = res.data.summary;
+				if (data) {
+					this.realtimeStatus = data;
+				}
+			})
+			.finally(() => {
+				this.isLoading = false;
+			});
 	},
 };
 </script>
