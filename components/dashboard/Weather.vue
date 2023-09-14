@@ -1,5 +1,5 @@
 <template>
-	<div class="mt-4">
+	<div class="mt-4" v-if="desc">
 		<CommonLoading v-if="isLoading" />
 		<div class="bg-dark-black200 px-6 py-4 rounded-lg">
 			<div class="text-2xl">
@@ -48,32 +48,34 @@ export default {
 		};
 	},
 	mounted() {
-		let isNight = this.$moment().hour() >= 18 || this.$moment().hour() <= 6;
-		getWeatherReport()
-			.then((res) => {
-				let data = res.data.records;
-				if (data && data.locations) {
-					let location = data.locations[0];
-					this.locat = location.locationsName;
+		this.$nextTick(() => {
+			let isNight = this.$moment().hour() >= 18 || this.$moment().hour() <= 6;
+			getWeatherReport()
+				.then((res) => {
+					let data = res.data.records;
+					if (data && data.locations) {
+						let location = data.locations[0];
+						this.locat = location.locationsName;
 
-					let detail = location.location[0].weatherElement;
-					this.desc = detail[1].time[0].elementValue[0].value;
-					this.icon = isNight
-						? "night" + detail[1].time[0].elementValue[1].value
-						: "day" + detail[1].time[0].elementValue[1].value;
-					this.temp = detail[3].time[0].elementValue[0].value;
-					this.rain = detail[7].time[0].elementValue[0].value;
-					this.confort = detail[5].time[0].elementValue[1].value;
-					this.wind = detail[9].time[0].elementValue[0].value;
-					this.humi = detail[4].time[0].elementValue[0].value;
-					this.speed =
-						detail[8].time[0].elementValue[0].value +
-						detail[8].time[0].elementValue[0].measures;
-				}
-			})
-			.finally(() => {
-				this.isLoading = false;
-			});
+						let detail = location.location[0].weatherElement;
+						this.desc = detail[1].time[0].elementValue[0].value;
+						this.icon = isNight
+							? "night" + detail[1].time[0].elementValue[1].value
+							: "day" + detail[1].time[0].elementValue[1].value;
+						this.temp = detail[3].time[0].elementValue[0].value;
+						this.rain = detail[7].time[0].elementValue[0].value;
+						this.confort = detail[5].time[0].elementValue[1].value;
+						this.wind = detail[9].time[0].elementValue[0].value;
+						this.humi = detail[4].time[0].elementValue[0].value;
+						this.speed =
+							detail[8].time[0].elementValue[0].value +
+							detail[8].time[0].elementValue[0].measures;
+					}
+				})
+				.finally(() => {
+					this.isLoading = false;
+				});
+		});
 	},
 };
 </script>

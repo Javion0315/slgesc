@@ -1,6 +1,8 @@
 <template>
 	<div class="bg-dark-black200 p-4 rounded-lg text-neutral-100 mt-4">
-		<div class="text-2xl text-neutral-100 text-center">綠能滲透率</div>
+		<div class="text-2xl text-neutral-100 text-center font-bold">
+			綠能滲透率
+		</div>
 		<div class="my-4" v-for="item in list" :key="item.title">
 			<CommonProgressBar
 				:title="item.title"

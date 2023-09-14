@@ -12,7 +12,7 @@
 				<img
 					class="max-w-full max-h-full object-contain m-auto flex justify-center items-center"
 					:src="require(`@/assets/images/link/${link.img}.png`)"
-					alt="link.img"
+					:alt="link.img"
 				/>
 			</div>
 			<div class="bg-dark-black200 p-2 rounded-b-lg break-words flex-1">

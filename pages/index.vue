@@ -7,7 +7,9 @@
 			<div>
 				<DashboardWeather />
 				<div class="bg-dark-black200 p-1 rounded-lg mt-4">
-					<div class="text-neutral-100 ml-2 mt-1 text-lg">區域概覽</div>
+					<div class="text-neutral-100 ml-2 mt-1 text-lg font-bold">
+						區域概覽
+					</div>
 					<img class="w-full" src="@/assets/images/area.png" alt="area" />
 				</div>
 			</div>

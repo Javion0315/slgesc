@@ -1,6 +1,8 @@
 <template>
 	<div class="bg-dark-black200 p-4 rounded-lg text-neutral-100 mt-4">
-		<div class="text-2xl text-neutral-100 text-center">區域用電概要</div>
+		<div class="text-2xl text-neutral-100 text-center font-bold">
+			區域用電概要
+		</div>
 		<CommonTable :th-list="thList" :table-data="tableData" />
 	</div>
 </template>
