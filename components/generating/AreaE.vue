@@ -47,7 +47,7 @@ export default {
 		getData() {
 			let data = this.realtimeStatus;
 			if (data) {
-				this.consuming = ((data[4].consuming / 1000) * 100).toFixed(0);
+				this.consuming = ((data[4].consuming / (2400 + 3500)) * 100).toFixed(0);
 				this.generating = data[4].generating;
 				this.getConsuming();
 				this.getGenerating();

@@ -4,16 +4,13 @@
 		<div
 			class="text-2xl text-neutral-100 text-center border-b-2 border-gray-600 p-4"
 		>
-			A 會展中心
+			D 示範場域
 		</div>
 		<div class="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-lg:gap-0 mt-4">
+			<highchart :options="chartOptions" v-if="chartOptions.series"></highchart>
 			<highchart
-				:options="chartConsumingOptions"
-				v-if="chartConsumingOptions.series"
-			></highchart>
-			<highchart
-				:options="chartGeneratingOptions"
-				v-if="chartGeneratingOptions.series"
+				:options="chartGreenPercentOptions"
+				v-if="chartGreenPercentOptions.series"
 			></highchart>
 		</div>
 	</div>
@@ -31,11 +28,9 @@ export default {
 	},
 	data() {
 		return {
-			chartConsumingOptions: {},
-			chartGeneratingOptions: {},
+			chartOptions: {},
+			chartGreenPercentOptions: {},
 			isLoading: true,
-			consuming: null,
-			generating: null,
 		};
 	},
 	mounted() {
@@ -47,17 +42,15 @@ export default {
 		getData() {
 			let data = this.realtimeStatus;
 			if (data) {
-				this.consuming = ((data[2].consuming / 1200) * 100).toFixed(0);
-				this.generating = data[2].generating;
-				this.getConsuming();
-				this.getGenerating();
+				this.getPower();
+				this.getGreenPercent();
 			}
 		},
-		getConsuming() {
+		getPower() {
 			let start = this.$moment().subtract(1, "days").format("x");
 			let end = this.$moment().format("x");
-			let monitor = "exhibition";
-			let monitorType = "consumingPercent";
+			let monitor = "ITRI";
+			let monitorType = "generating:storing:consuming";
 			let tableType = "Hour";
 			getHistoryTrend(monitor, monitorType, tableType, start, end)
 				.then((res) => {
@@ -72,7 +65,7 @@ export default {
 							formatSeries[i].data = formatData;
 						}
 
-						this.chartConsumingOptions = {
+						this.chartOptions = {
 							credits: {
 								enabled: false,
 							},
@@ -82,7 +75,7 @@ export default {
 									fontWeight: "normal",
 								},
 							},
-							colors: ["#477880"],
+							colors: ["#6D3265", "#483F60", "#385331"],
 							chart: {
 								type: "area",
 								backgroundColor: "transparent",
@@ -93,27 +86,29 @@ export default {
 									day: "%m月%d日", // 配置日期格式
 								},
 							},
+							title: {
+								style: {
+									color: "#FFF",
+									font: "normal 20px '微軟正黑體'",
+									display: "none",
+								},
+							},
 							yAxis: {
 								title: {
-									text: "契約容量占比 (%)",
+									text: "KW",
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
 									},
 								},
-							},
-							title: {
-								text: `即時契約容量占比 ${this.consuming}%`,
-								style: {
-									color: "#FFF",
-									font: "normal 20px '微軟正黑體'",
-								},
+								gridLineDashStyle: "Dash",
 							},
 							tooltip: {
 								headerFormat: "{point.key:%Y/%m/%d %A}<br/>",
 							},
 							plotOptions: {
 								area: {
+									depth: 100,
 									marker: {
 										enabled: false,
 										symbol: "circle",
@@ -121,6 +116,9 @@ export default {
 										states: {
 											hover: {
 												enabled: true,
+											},
+											inactive: {
+												enabled: false,
 											},
 										},
 									},
@@ -136,11 +134,11 @@ export default {
 					this.isLoading = false;
 				});
 		},
-		getGenerating() {
+		getGreenPercent() {
 			let start = this.$moment().subtract(1, "days").format("x");
 			let end = this.$moment().format("x");
-			let monitor = "exhibition";
-			let monitorType = "generating";
+			let monitor = "ITRI";
+			let monitorType = "greenPercent";
 			let tableType = "Hour";
 			getHistoryTrend(monitor, monitorType, tableType, start, end)
 				.then((res) => {
@@ -155,7 +153,7 @@ export default {
 							formatSeries[i].data = formatData;
 						}
 
-						this.chartGeneratingOptions = {
+						this.chartGreenPercentOptions = {
 							credits: {
 								enabled: false,
 							},
@@ -165,10 +163,17 @@ export default {
 									fontWeight: "normal",
 								},
 							},
-							colors: ["#477880"],
+							colors: ["#856C2D"],
 							chart: {
-								type: "area",
+								type: "column",
 								backgroundColor: "transparent",
+							},
+							title: {
+								style: {
+									color: "#FFF",
+									font: "normal 20px '微軟正黑體'",
+									display: "none",
+								},
 							},
 							xAxis: {
 								type: "datetime",
@@ -178,32 +183,18 @@ export default {
 							},
 							yAxis: {
 								title: {
-									text: "發電量 (KW)",
+									text: "綠能滲透率 (%)",
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
 									},
 								},
 							},
-							title: {
-								text: `即時發電量 ${this.generating} Kw`,
-								style: {
-									color: "#FFF",
-									font: "normal 20px '微軟正黑體'",
-								},
-							},
+
 							plotOptions: {
-								area: {
-									marker: {
-										enabled: false,
-										symbol: "circle",
-										radius: 2,
-										states: {
-											hover: {
-												enabled: true,
-											},
-										},
-									},
+								column: {
+									pointPadding: 0.2,
+									borderWidth: 0,
 									pointInterval: 3600 * 1000,
 									pointStart: this.$moment().subtract(1, "days"),
 								},

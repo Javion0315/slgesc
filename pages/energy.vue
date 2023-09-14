@@ -1,7 +1,37 @@
 <template>
-	<div>energy</div>
+	<div>
+		<div>
+			<energyAreaC :realtime-status="realtimeStatus" />
+			<energyAreaD :realtime-status="realtimeStatus" />
+			<energyAreaA :realtime-status="realtimeStatus" />
+			<energyAreaK :realtime-status="realtimeStatus" />
+			<energyAreaE :realtime-status="realtimeStatus" />
+		</div>
+	</div>
 </template>
 
 <script>
-export default {};
+import { getRealtimeStatus } from "~/api/main";
+
+export default {
+	data() {
+		return {
+			realtimeStatus: [],
+			isLoading: false,
+		};
+	},
+	created() {
+		this.isLoading = true;
+		getRealtimeStatus()
+			.then((res) => {
+				let data = res.data.summary;
+				if (data) {
+					this.realtimeStatus = data;
+				}
+			})
+			.finally(() => {
+				this.isLoading = false;
+			});
+	},
+};
 </script>
