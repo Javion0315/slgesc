@@ -1,11 +1,15 @@
 <template>
 	<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-		<CommonLoading v-if="isLoading" />
 		<div class="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-lg:gap-0 mt-4">
-			<highchart :options="chartOptions" v-if="chartOptions.series"></highchart>
 			<highchart
+				class="h-[400px]"
+				:options="chartOptions"
+				v-show="chartOptions.series"
+			></highchart>
+			<highchart
+				class="h-[400px]"
 				:options="chartThisOptions"
-				v-if="chartThisOptions.series"
+				v-show="chartThisOptions.series"
 			></highchart>
 		</div>
 
@@ -98,35 +102,30 @@ export default {
 			{ name: "產業專用區", code: "B" },
 		];
 		let idList = ["C", "D", "A", "K", "E", "C1", "住", "B"];
-		this.isLoading = true;
-		getConsumptionCompare()
-			.then((res) => {
-				let data = res.data.consuming; // 用電量
-				let last = data.lastMonth;
-				let thisMonthTotal = 0;
-				let thisVal = data.thisMonth;
-				if (data) {
-					// RdCenter: 資安暨智慧科技研發專區, ITRI: 綠能科技示範場域, Exhibition: 會展中心
-					titleList.forEach((item, index) => {
-						let value = {
-							ID: idList[index],
-							area: item.name,
-							lastMonth: last[item.code] || "N/A",
-							thisMonth: thisVal[item.code] || "N/A",
-						};
-						let thisMonthItem = thisVal[item.code];
-						if (thisMonthItem !== undefined) {
-							thisMonthTotal += thisVal[item.code];
-						}
-						this.tableData.push(value);
-					});
-					this.getChart();
-					this.$emit("consuming-total", thisMonthTotal);
-				}
-			})
-			.finally(() => {
-				this.isLoading = false;
-			});
+		getConsumptionCompare().then((res) => {
+			let data = res.data.consuming; // 用電量
+			let last = data.lastMonth;
+			let thisMonthTotal = 0;
+			let thisVal = data.thisMonth;
+			if (data) {
+				// RdCenter: 資安暨智慧科技研發專區, ITRI: 綠能科技示範場域, Exhibition: 會展中心
+				titleList.forEach((item, index) => {
+					let value = {
+						ID: idList[index],
+						area: item.name,
+						lastMonth: last[item.code] || "N/A",
+						thisMonth: thisVal[item.code] || "N/A",
+					};
+					let thisMonthItem = thisVal[item.code];
+					if (thisMonthItem !== undefined) {
+						thisMonthTotal += thisVal[item.code];
+					}
+					this.tableData.push(value);
+				});
+				this.getChart();
+				this.$emit("consuming-total", thisMonthTotal);
+			}
+		});
 	},
 	methods: {
 		getChart() {

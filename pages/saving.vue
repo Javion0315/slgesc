@@ -1,18 +1,27 @@
 <template>
-	<div>
+	<div v-cloak>
 		<div
 			class="grid grid-cols-3 gap-4 max-lg:grid-cols-1 max-lg:gap-4 m-auto px-4"
 		>
+			<CommonLoading v-if="isLoading" />
 			<div
 				class="bg-dark-black200/80 h-full flex flex-col p-2 rounded-lg"
 				v-for="item in imgList"
 				:key="item.img"
 			>
-				<div class="p-1 rounded-t-lg h-70">
+				<div class="p-1 rounded-t-lg h-70 w-70">
+					<div
+						v-if="imageLoaded"
+						class="h-72 w-72 object-contain m-auto flex justify-center items-center"
+					>
+						Loading...
+					</div>
 					<img
 						class="max-w-full max-h-full object-contain m-auto flex justify-center items-center"
-						:src="require(`@/assets/images/${item.img}.jpg`)"
+						:src="getImagePath(item.img)"
 						:alt="item.img"
+						@load="onImageLoad"
+						v-show="!imageLoaded"
 					/>
 				</div>
 				<div
@@ -38,6 +47,8 @@ export default {
 		return {
 			imgList: [],
 			consumingTotal: 0,
+			imageLoaded: true,
+			isLoading: true,
 		};
 	},
 	watch: {
@@ -49,6 +60,15 @@ export default {
 		},
 	},
 	methods: {
+		getImagePath(imgName) {
+			return require(`@/assets/images/${imgName}.jpg`);
+		},
+		onImageLoad() {
+			this.imageLoaded = false;
+			setTimeout(() => {
+				this.isLoading = false;
+			}, 100);
+		},
 		getData() {
 			getRealtimeStatus().then((res) => {
 				let data = res.data.summary;
