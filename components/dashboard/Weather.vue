@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-4" v-if="desc">
 		<CommonLoading v-if="isLoading" />
-		<div class="bg-dark-black200 px-6 py-4 rounded-lg">
+		<div class="bg-dark-black200/80 px-6 py-4 rounded-lg">
 			<div class="text-2xl">
 				{{ locat }}
 			</div>

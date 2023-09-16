@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-dark-black200 p-1 rounded-lg text-neutral-100">
+	<div class="bg-dark-black200/80 p-1 rounded-lg text-neutral-100">
 		<CommonLoading v-if="isLoading" />
 		<div
-			class="text-2xl text-neutral-100 text-center border-b-2 border-gray-600 p-4"
+			class="text-2xl text-dark-yellow200 font-bold text-center border-b-2 border-gray-600 p-4"
 		>
 			C 資安暨智慧科技研發大樓
 		</div>
@@ -85,6 +85,11 @@ export default {
 								dateTimeLabelFormats: {
 									day: "%m月%d日", // 配置日期格式
 								},
+								labels: {
+									style: {
+										color: "#FFF",
+									},
+								},
 							},
 							title: {
 								style: {
@@ -99,6 +104,11 @@ export default {
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
+									},
+								},
+								labels: {
+									style: {
+										color: "#FFF",
 									},
 								},
 								gridLineDashStyle: "Dash",
@@ -180,6 +190,11 @@ export default {
 								dateTimeLabelFormats: {
 									day: "%m月%d日", // 配置日期格式
 								},
+								labels: {
+									style: {
+										color: "#FFF",
+									},
+								},
 							},
 							yAxis: {
 								title: {
@@ -187,6 +202,11 @@ export default {
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
+									},
+								},
+								labels: {
+									style: {
+										color: "#FFF",
 									},
 								},
 							},

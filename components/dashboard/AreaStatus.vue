@@ -1,17 +1,17 @@
 <template>
 	<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
 		<div
-			class="bg-dark-black200 p-1 rounded-lg text-neutral-100"
+			class="bg-dark-black200/80 p-1 rounded-lg text-neutral-300"
 			v-for="(item, index) in statusList"
 			:key="index"
 		>
 			<div class="relative">
-				<img class="w-full" src="@/assets/images/chart.png" alt="chart" />
+				<img class="w-full" src="@/assets/images/chart1.png" alt="chart" />
 				<div class="absolute top-1 left-0 py-2 px-4">
 					<div>
 						{{ item.label }}
 					</div>
-					<div class="text-2xl mt-3">
+					<div class="text-2xl mt-3 font-bold text-dark-yellow200">
 						{{ item.value }}
 					</div>
 				</div>

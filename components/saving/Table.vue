@@ -1,7 +1,15 @@
 <template>
 	<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
 		<CommonLoading v-if="isLoading" />
-		<div class="inline-block min-w-full shadow-md overflow-hidden">
+		<div class="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-lg:gap-0 mt-4">
+			<highchart :options="chartOptions" v-if="chartOptions.series"></highchart>
+			<highchart
+				:options="chartThisOptions"
+				v-if="chartThisOptions.series"
+			></highchart>
+		</div>
+
+		<div class="inline-block min-w-full shadow-md overflow-hidden mt-4">
 			<table class="min-w-full leading-normal max-sm:hidden">
 				<thead>
 					<tr>
@@ -25,7 +33,9 @@
 						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
 							{{ item.lastMonth }}
 						</td>
-						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-lg text-dark-yellow200 font-bold"
+						>
 							{{ item.thisMonth }}
 						</td>
 					</tr>
@@ -47,7 +57,10 @@
 						去年同期度數 <span>{{ val.lastMonth }}</span>
 					</div>
 					<div>
-						本期用電度數 <span>{{ val.thisMonth }}</span>
+						本期用電度數
+						<span class="text-lg text-dark-yellow200 font-bold">{{
+							val.thisMonth
+						}}</span>
 					</div>
 				</div>
 			</div>
@@ -62,6 +75,8 @@ export default {
 	data() {
 		return {
 			isLoading: false,
+			chartOptions: {},
+			chartThisOptions: {},
 			thList: [
 				{ label: "編號", value: "ID" },
 				{ label: "場館區域", value: "area" },
@@ -88,6 +103,7 @@ export default {
 			.then((res) => {
 				let data = res.data.consuming; // 用電量
 				let last = data.lastMonth;
+				let thisMonthTotal = 0;
 				let thisVal = data.thisMonth;
 				if (data) {
 					// RdCenter: 資安暨智慧科技研發專區, ITRI: 綠能科技示範場域, Exhibition: 會展中心
@@ -98,13 +114,116 @@ export default {
 							lastMonth: last[item.code] || "N/A",
 							thisMonth: thisVal[item.code] || "N/A",
 						};
+						let thisMonthItem = thisVal[item.code];
+						if (thisMonthItem !== undefined) {
+							thisMonthTotal += thisVal[item.code];
+						}
 						this.tableData.push(value);
 					});
+					this.getChart();
+					this.$emit("consuming-total", thisMonthTotal);
 				}
 			})
 			.finally(() => {
 				this.isLoading = false;
 			});
+	},
+	methods: {
+		getChart() {
+			let lastFormatSeries = [];
+			let thisFormatSeries = [];
+			this.tableData.forEach((item) => {
+				let lastMonth = item.lastMonth === "N/A" ? 0 : item.lastMonth;
+				let thisMonth = item.thisMonth === "N/A" ? 0 : item.thisMonth;
+				let lastData = [item.ID, lastMonth];
+				let thisData = [item.ID, thisMonth];
+				lastFormatSeries.push(lastData);
+				thisFormatSeries.push(thisData);
+			});
+			this.chartOptions = this.chart(lastFormatSeries, "去年同期度數");
+			this.chartThisOptions = this.chart(thisFormatSeries, "本期用電度數");
+		},
+		chart(formatSeries, title) {
+			return {
+				credits: {
+					enabled: false,
+				},
+				legend: {
+					enabled: false,
+				},
+
+				chart: {
+					type: "column",
+					backgroundColor: "transparent",
+				},
+				xAxis: {
+					type: "category",
+					labels: {
+						style: {
+							color: "#FFF",
+						},
+					},
+				},
+				yAxis: {
+					title: {
+						text: "用電度數",
+						style: {
+							color: "#FFF",
+							font: "normal 16px '微軟正黑體'",
+						},
+					},
+					labels: {
+						style: {
+							color: "#FFF",
+						},
+					},
+				},
+				title: {
+					text: title,
+					style: {
+						color: "#FFF",
+						font: "normal 20px '微軟正黑體'",
+					},
+				},
+				tooltip: {
+					headerFormat: "{point.key: %A}<br/>",
+					style: {
+						display: "none",
+						font: "normal 20px '微軟正黑體'",
+					},
+				},
+				series: [
+					{
+						data: formatSeries,
+						colorByPoint: true,
+						groupPadding: 0,
+						colors: [
+							"#4F6947",
+							"#856C2D",
+							"#477880",
+							"#88522E",
+							"#813731",
+							"#204C71",
+							"#6D3265",
+							"#483F60",
+							"#385331",
+							"#766210",
+						],
+						dataLabels: {
+							enabled: true,
+							color: "#FFFFFF",
+							align: "center",
+							format: "{point.y:.1f}", // one decimal
+							y: 10, // 10 pixels down from the top
+							style: {
+								fontSize: "13px",
+								fontFamily: "Verdana, sans-serif",
+							},
+						},
+					},
+				],
+			};
+		},
 	},
 };
 </script>

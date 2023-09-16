@@ -42,6 +42,10 @@ module.exports = {
           'black200': '#212121',
           'black': '#121212'
         }
+      },
+      backgroundImage: {
+        'tech': "url('@/assets/images/bg.jpg')",
+        'sidebar': "url('@/assets/images/sidebar.jpg')",
       }
     }
   }

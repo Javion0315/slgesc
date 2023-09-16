@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-dark-black200 p-4 rounded-lg mt-4">
+	<div class="bg-dark-black200/80 p-4 rounded-lg mt-4">
 		<CommonLoading v-if="isLoading" />
 		<highchart
 			class="h-[400px]"
@@ -86,6 +86,11 @@ export default {
 							dateTimeLabelFormats: {
 								day: "%m月%d日", // 配置日期格式
 							},
+							labels: {
+								style: {
+									color: "#FFF",
+								},
+							},
 						},
 						yAxis: {
 							title: {
@@ -93,6 +98,11 @@ export default {
 								style: {
 									color: "#FFF",
 									font: "normal 16px '微軟正黑體'",
+								},
+							},
+							labels: {
+								style: {
+									color: "#FFF",
 								},
 							},
 						},

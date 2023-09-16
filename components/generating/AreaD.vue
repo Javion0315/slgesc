@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-dark-black200 p-1 rounded-lg text-neutral-100 mt-4">
+	<div class="bg-dark-black200/80 p-1 rounded-lg text-neutral-100 mt-4">
 		<CommonLoading v-if="isLoading" />
 		<div
-			class="text-2xl text-neutral-100 text-center border-b-2 border-gray-600 p-4"
+			class="text-2xl text-dark-yellow200 font-bold text-center border-b-2 border-gray-600 p-4"
 		>
 			D 示範場域
 		</div>
@@ -92,6 +92,11 @@ export default {
 								dateTimeLabelFormats: {
 									day: "%m月%d日", // 配置日期格式
 								},
+								labels: {
+									style: {
+										color: "#FFF",
+									},
+								},
 							},
 							yAxis: {
 								title: {
@@ -99,6 +104,11 @@ export default {
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
+									},
+								},
+								labels: {
+									style: {
+										color: "#FFF",
 									},
 								},
 							},
@@ -175,6 +185,11 @@ export default {
 								dateTimeLabelFormats: {
 									day: "%m月%d日", // 配置日期格式
 								},
+								labels: {
+									style: {
+										color: "#FFF",
+									},
+								},
 							},
 							yAxis: {
 								title: {
@@ -182,6 +197,11 @@ export default {
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
+									},
+								},
+								labels: {
+									style: {
+										color: "#FFF",
 									},
 								},
 							},

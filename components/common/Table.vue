@@ -14,7 +14,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="item in tableData" :key="item.ID">
+					<tr v-for="(item, index) in tableData" :key="index">
 						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
 							{{ item.ID }}
 						</td>
@@ -22,7 +22,12 @@
 							{{ item.name }}
 						</td>
 						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
-							{{ item.consuming }}
+							<!-- 即時用電量 (RealtimeStatus)/各區契約用電量 -->
+							<CommonProgressBar
+								:is-show-title="false"
+								:percent="item.consuming"
+								:theme="item.theme"
+							/>
 						</td>
 						<td
 							class="px-5 py-2 border-b border-gray-600 bg-dark text-sm whitespace-nowrap"
@@ -41,8 +46,8 @@
 			<div class="hidden max-sm:flex flex-col">
 				<div
 					class="px-5 py-2 border-b border-gray-600 bg-dark text-base leading-8"
-					v-for="val in tableData"
-					:key="val.name"
+					v-for="(val, idx) in tableData"
+					:key="val.ID + idx"
 				>
 					<div>
 						編號 <span>{{ val.ID }}</span>

@@ -8,14 +8,14 @@
 			:key="link.id"
 			@click="goPath(link.href)"
 		>
-			<div class="bg-white p-1 rounded-t-lg h-24">
+			<div class="bg-white p-1 rounded-t-lg h-24 flex items-center">
 				<img
 					class="max-w-full max-h-full object-contain m-auto flex justify-center items-center"
 					:src="require(`@/assets/images/link/${link.img}.png`)"
 					:alt="link.img"
 				/>
 			</div>
-			<div class="bg-dark-black200 p-2 rounded-b-lg break-words flex-1">
+			<div class="bg-dark-black200/70 p-2 rounded-b-lg break-words flex-1">
 				{{ link.href }}
 			</div>
 		</div>

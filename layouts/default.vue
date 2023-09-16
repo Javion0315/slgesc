@@ -1,6 +1,9 @@
 <template>
-	<div class="bg-dark-black text-white min-h-screen" v-cloak>
-		<div>
+	<div
+		class="text-white min-h-screen bg-tech bg-no-repeat bg-cover bg-center bg-fixed"
+		v-cloak
+	>
+		<div class="backdrop-blur-[2px]">
 			<Navbar />
 			<div class="flex">
 				<Sidebar class="sticky top-0 min-h-screen" v-if="getToggleState" />
