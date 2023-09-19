@@ -8,7 +8,7 @@
 			<div class="mt-1">
 				{{ desc }}
 			</div>
-			<div class="flex justify-between items-center gap-10 mb-1 mt-2">
+			<div class="flex justify-between items-center gap-10">
 				<div class="text-3xl">{{ temp }}°C</div>
 				<div v-if="icon">
 					<img
@@ -25,6 +25,13 @@
 				<font-awesome-icon :icon="['fas', 'wind']" class="mr-1" />
 				{{ wind }} / {{ speed }}
 			</div>
+			<div class="text-sm border-t border-gray-400 mt-4 pt-4">
+				<font-awesome-icon :icon="['far', 'sun']" class="mr-1" />
+				日照
+				<span class="font-bold text-dark-yellow200 text-xl ml-2">
+					{{ realtimeStatus[5].generating }} ( W/m<sup>2</sup> )
+				</span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -33,6 +40,12 @@
 import { getWeatherReport } from "~/api/main";
 
 export default {
+	props: {
+		realtimeStatus: {
+			type: Array,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			desc: "", // 天氣描述

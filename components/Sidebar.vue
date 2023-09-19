@@ -1,7 +1,7 @@
 <template>
 	<div class="absolute inset-0 top-16 z-50">
 		<div
-			class="bg-dark-black100/70 w-60 top-0 absolute inset-0 overflow-y-auto max-lg:bg-dark-black100"
+			class="bg-dark-black100/50 w-52 top-0 absolute inset-0 overflow-y-auto max-lg:bg-dark-black100"
 		>
 			<div
 				class="flex justify-start items-center py-4 pl-6 pr-12 hover:text-dark-yellow cursor-pointer text-base whitespace-nowrap"

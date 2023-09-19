@@ -2,7 +2,7 @@
 	<div class="bg-dark-black200/80 p-4 rounded-lg mt-4">
 		<CommonLoading v-if="isLoading" />
 		<highchart
-			class="h-[400px]"
+			class="h-[400px] relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 			:options="chartOptions"
 			v-if="chartOptions.series"
 		></highchart>
@@ -23,7 +23,7 @@ export default {
 	mounted() {
 		let start = this.$moment().subtract(3, "days").format("x");
 		let end = this.$moment().format("x");
-		let monitor = "RdCenter:ITRI:exhibition:K:E";
+		let monitor = "RdCenter:ITRI:exhibition:K:E:SL";
 		let monitorType = "generating";
 		let tableType = "Min";
 		this.isLoading = true;
@@ -37,6 +37,12 @@ export default {
 						formatData = formatSeries[i].data.map((item) => {
 							return [this.$moment(item[0]).format("MMM Do"), item[1]];
 						});
+
+						if (formatSeries[i].name === "沙崙區_發電量") {
+							formatSeries[i].type = "spline";
+						} else {
+							formatSeries[i].type = "area";
+						}
 						formatSeries[i].data = formatData;
 					}
 
@@ -63,10 +69,9 @@ export default {
 							"#766210",
 						],
 						chart: {
-							type: "area",
 							backgroundColor: "transparent",
+							zoomType: "xy",
 						},
-
 						title: {
 							text: "即時發電資訊",
 							style: {
@@ -122,6 +127,18 @@ export default {
 											enabled: true,
 										},
 									},
+								},
+								pointInterval: 3000 * 200,
+								pointStart: this.$moment().subtract(3, "days"),
+							},
+							spline: {
+								marker: {
+									// enabled: true,
+									lineWidth: 3,
+									symbol: "square",
+									lineColor: "#204C71",
+									symbol:
+										"url(https://www.highcharts.com/samples/graphics/sun.png)",
 								},
 								pointInterval: 3000 * 200,
 								pointStart: this.$moment().subtract(3, "days"),

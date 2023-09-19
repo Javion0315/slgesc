@@ -1,6 +1,7 @@
 <template>
 	<div class="bg-dark-black200/80 p-4 rounded-lg text-neutral-100 mt-4">
-		<div class="text-2xl text-center font-bold">區域用電概要</div>
+		<div class="text-2xl text-center font-bold mb-7">區域用電概要</div>
+		<img class="m-auto w-11/12" src="@/assets/images/3DMap.png" alt="3DMap" />
 		<CommonTable :th-list="thList" :table-data="tableData" />
 	</div>
 </template>
@@ -18,6 +19,7 @@ export default {
 			thList: [
 				{ label: "編號", value: "ID" },
 				{ label: "單位名稱", value: "name" },
+				{ label: "即時發電量", value: "generating" },
 				{ label: "用電量", value: "consuming" },
 				{ label: "狀態", value: "status" },
 			],
@@ -56,9 +58,11 @@ export default {
 			let consumingList = [790, 1000, 1200, 790, 5900, 150, 200, 0];
 			this.realtimeStatus.forEach((item, idx) => {
 				// 即時用電量 (RealtimeStatus)/各區契約用電量
+				// generating: 發電量
 				let value = {
 					ID: idList[idx],
 					name: titleList[idx],
+					generating: item.generating.toFixed(2),
 					consuming:
 						((item.consuming / consumingList[idx]) * 100).toFixed(0) > 100
 							? 100
@@ -68,16 +72,16 @@ export default {
 				};
 				this.tableData.push(value);
 			});
-			for (let i = 5; i < titleList.length; i++) {
-				let value = {
-					ID: idList[i],
-					name: titleList[i],
-					consuming: 0,
-					status: "N/A",
-					theme: colorList[i],
-				};
-				this.tableData.push(value);
-			}
+			// for (let i = 7; i < titleList.length; i++) {
+			// 	let value = {
+			// 		ID: idList[i],
+			// 		name: titleList[i],
+			// 		consuming: 0,
+			// 		status: "N/A",
+			// 		theme: colorList[i],
+			// 	};
+			// 	this.tableData.push(value);
+			// }
 		},
 	},
 };

@@ -18,8 +18,13 @@
 						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
 							{{ item.ID }}
 						</td>
-						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base whitespace-nowrap"
+						>
 							{{ item.name }}
+						</td>
+						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
+							{{ item.generating }}
 						</td>
 						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
 							<!-- 即時用電量 (RealtimeStatus)/各區契約用電量 -->
@@ -54,6 +59,9 @@
 					</div>
 					<div>
 						單位名稱 <span>{{ val.name }}</span>
+					</div>
+					<div>
+						即時發電量 <span>{{ val.generating }}</span>
 					</div>
 					<div>
 						用電量 <span>{{ val.consuming }}</span>

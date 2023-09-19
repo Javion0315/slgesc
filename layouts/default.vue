@@ -3,7 +3,7 @@
 		class="text-white min-h-screen bg-tech bg-no-repeat bg-cover bg-center bg-fixed"
 		v-cloak
 	>
-		<div class="backdrop-blur-[2px]">
+		<div class="backdrop-blur-[1px]">
 			<Navbar />
 			<div class="flex">
 				<Sidebar class="sticky top-0 min-h-screen" v-if="getToggleState" />
@@ -11,7 +11,7 @@
 					<Nuxt
 						:class="[
 							'p-6',
-							getToggleState && windowWidth >= 840 ? 'ml-64' : 'ml-0',
+							getToggleState && windowWidth >= 840 ? 'ml-52' : 'ml-0',
 						]"
 					/>
 				</main>
