@@ -1,7 +1,60 @@
 <template>
-	<div class="bg-dark-black200/80 p-4 rounded-lg text-neutral-100 mt-4">
+	<div
+		class="bg-dark-black200/80 p-4 rounded-lg text-neutral-100 mt-4"
+		v-if="tableData[0]"
+	>
 		<div class="text-2xl text-center font-bold mb-7">區域用電概要</div>
-		<img class="m-auto w-11/12" src="@/assets/images/3DMap.png" alt="3DMap" />
+		<!-- <img class="m-auto w-11/12" src="@/assets/images/3DMap.png" alt="3DMap" /> -->
+		<div class="relative" v-cloak>
+			<!-- C -->
+			<div
+				class="absolute text-lg font-bold top-[47.5%] right-[37%] max-2xl:text-base max-lg:text-xs"
+			>
+				{{ tableData[0].generating }} KW
+			</div>
+			<!-- D -->
+			<div
+				class="absolute text-lg font-bold top-[34%] right-[8%] max-lg:text-xs max-2xl:text-base"
+			>
+				{{ tableData[1].generating }} KW
+			</div>
+			<!-- A -->
+			<div
+				class="absolute text-lg font-bold top-[47.5%] left-[15%] max-lg:text-xs max-2xl:text-base"
+			>
+				{{ tableData[2].generating }} KW
+			</div>
+			<!-- K -->
+			<div
+				class="absolute text-lg font-bold top-[29%] right-[8%] max-lg:text-xs max-2xl:text-base"
+			>
+				{{ tableData[3].generating }} KW
+			</div>
+			<!-- E -->
+			<div
+				class="absolute text-lg font-bold top-[17.5%] right-[22%] max-lg:text-xs max-2xl:text-base"
+			>
+				{{ tableData[4].generating }} KW
+			</div>
+			<!-- C1 -->
+			<div
+				class="absolute text-lg font-bold top-[29%] right-[45%] max-lg:text-xs max-2xl:text-base"
+			>
+				{{ tableData[5].generating }} KW
+			</div>
+			<!-- 住 -->
+			<div
+				class="absolute text-lg font-bold top-[6%] right-[41%] max-lg:text-xs max-2xl:text-base"
+			>
+				{{ tableData[6].generating }} KW
+			</div>
+			<img
+				class="m-auto w-11/12"
+				src="@/assets/images/3DMapValue.png"
+				alt="3DMap"
+			/>
+		</div>
+
 		<CommonTable :th-list="thList" :table-data="tableData" />
 	</div>
 </template>

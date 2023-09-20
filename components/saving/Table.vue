@@ -62,7 +62,7 @@
 					</div>
 					<div>
 						本期用電度數
-						<span class="text-lg text-dark-yellow200 font-bold">{{
+						<span class="text-2xl text-dark-yellow200 font-bold">{{
 							val.thisMonth
 						}}</span>
 					</div>

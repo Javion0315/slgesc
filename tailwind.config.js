@@ -46,6 +46,7 @@ module.exports = {
       backgroundImage: {
         'tech': "url('@/assets/images/bg.jpg')",
         'sidebar': "url('@/assets/images/sidebar.jpg')",
+        'tree': "url('@/assets/images/tree.jpg')",
       }
     }
   }

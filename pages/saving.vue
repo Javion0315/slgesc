@@ -87,22 +87,22 @@ export default {
 					this.imgList = [
 						{
 							img: "consumption",
-							content: `月平均 EUI <br /> <span class="text-lg text-dark-yellow200 font-bold">
+							content: `月平均 EUI <br /> <span class="text-2xl text-dark-yellow200 font-bold">
           ${(this.consumingTotal / floor).toFixed(2)} </span> (kWh/m2)`,
 						},
 						{
 							img: "solar",
-							content: `總綠電滲透率 <span class="text-lg text-dark-yellow200 font-bold">${(
+							content: `總綠電滲透率 <span class="text-2xl text-dark-yellow200 font-bold">${(
 								(generating / consuming) *
 								100
 							).toFixed(1)}(%) </span> <br /> 總發電量
-              <span class="text-lg text-dark-yellow200 font-bold"> ${generating.toFixed(
+              <span class="text-2xl text-dark-yellow200 font-bold"> ${generating.toFixed(
 								2
 							)} </span> (kWp/月)`,
 						},
 						{
 							img: "CO2",
-							content: `月減碳量 <br /> <span class="text-lg text-dark-yellow200 font-bold">
+							content: `月減碳量 <br /> <span class="text-2xl text-dark-yellow200 font-bold">
               55,648 </span>(kg-CO2/度)`,
 						},
 					];
