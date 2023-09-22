@@ -47,7 +47,13 @@ export default {
 		getData() {
 			let data = this.realtimeStatus;
 			if (data) {
-				this.consuming = ((data[3].consuming / 1000) * 100).toFixed(0);
+				// K 區沒有契約容量 0 = 100%
+				let k = 0;
+				if (k === 0) {
+					this.consuming = 100;
+				} else {
+					this.consuming = ((data[3].consuming / k) * 100).toFixed(0);
+				}
 				this.generating = data[3].generating;
 				this.getConsuming();
 				this.getGenerating();

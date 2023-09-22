@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="text-center bg-dark-black200/80 w-full fixed h-screen top-0 left-0 z-[999]"
+		class="text-center bg-dark-black200/80 w-full fixed h-full top-0 left-0 z-[999]"
 	>
 		<div
 			role="status"

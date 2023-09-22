@@ -16,7 +16,9 @@
 						class="absolute right-[10%] top-[50%] transform -translate-x-[10%] -translate-y-[50%] text-right max-lg:right-[3%] max-lg:-translate-x-[3%]"
 					>
 						<div class="mt-1 text-lg font-bold">相當於種植</div>
-						<div class="mt-1 text-6xl font-bold text-dark-yellow200">731</div>
+						<div class="mt-1 text-6xl font-bold text-dark-yellow200">
+							{{ trees }}
+						</div>
 						<div class="mt-1 text-lg font-bold">棵樹</div>
 					</div>
 				</div>
@@ -42,14 +44,21 @@ export default {
 		return {
 			realtimeStatus: [],
 			isLoading: false,
+			trees: 0,
 		};
 	},
 	created() {
 		this.isLoading = true;
 		getRealtimeStatus()
 			.then((res) => {
+				// 目前發電量Ｘ0.495 / 12KG＝ 幾棵樹
 				let data = res.data.summary;
 				if (data) {
+					let generating = 0;
+					data.forEach((res) => {
+						generating += res.generating;
+					});
+					this.trees = ((generating * 0.495) / 12).toFixed(0);
 					this.realtimeStatus = data;
 				}
 			})

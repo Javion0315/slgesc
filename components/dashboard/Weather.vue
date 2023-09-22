@@ -29,7 +29,7 @@
 				<font-awesome-icon :icon="['far', 'sun']" class="mr-1" />
 				日照
 				<span class="font-bold text-dark-yellow200 text-xl ml-2">
-					{{ realtimeStatus[5].generating }} ( W/m<sup>2</sup> )
+					{{ realtimeStatus[5].generating.toFixed(2) }} ( W/m<sup>2</sup> )
 				</span>
 			</div>
 		</div>
