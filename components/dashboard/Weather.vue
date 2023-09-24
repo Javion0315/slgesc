@@ -1,7 +1,7 @@
 <template>
-	<div class="mt-4" v-if="desc">
+	<div v-if="desc">
 		<CommonLoading v-if="isLoading" />
-		<div class="bg-dark-black200/80 px-6 py-4 rounded-lg">
+		<!-- <div class="bg-dark-black200/80 px-6 py-4 rounded-lg">
 			<div class="text-2xl">
 				{{ locat }}
 			</div>
@@ -31,6 +31,72 @@
 				<span class="font-bold text-dark-yellow200 text-xl ml-2">
 					{{ realtimeStatus[5].generating.toFixed(2) }} ( W/m<sup>2</sup> )
 				</span>
+			</div>
+		</div> -->
+		<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-1">
+			<div class="bg-dark-black200/80 px-6 py-4 rounded-lg">
+				<div class="flex justify-between items-center gap-10">
+					<div class="whitespace-nowrap">
+						<div class="text-2xl">
+							{{ locat }}
+						</div>
+						<div class="my-2">
+							{{ desc }}
+						</div>
+						<div class="text-3xl">{{ temp }}°C</div>
+					</div>
+					<div v-if="icon">
+						<img
+							:src="require(`@/assets/images/weather/${icon}.svg`)"
+							:alt="icon"
+						/>
+					</div>
+				</div>
+			</div>
+			<div
+				class="bg-dark-black200/80 px-6 py-4 rounded-lg flex justify-center items-center"
+			>
+				<div class="flex justify-between items-center gap-10 w-full">
+					<div class="whitespace-nowrap">
+						<div class="text-2xl">相對濕度</div>
+						<div class="text-3xl mt-4">{{ rain }}%</div>
+					</div>
+					<div>
+						<font-awesome-icon :icon="['fas', 'cloud-rain']" class="text-5xl" />
+					</div>
+				</div>
+			</div>
+			<div
+				class="bg-dark-black200/80 px-6 py-4 rounded-lg flex justify-center items-center"
+			>
+				<div class="flex justify-between items-center gap-10 w-full">
+					<div class="whitespace-nowrap">
+						<div class="text-2xl">風向/風速</div>
+						<div class="text-2xl mt-4">
+							{{ wind }}
+							<div class="text-sm">({{ speed }})</div>
+						</div>
+					</div>
+					<div>
+						<font-awesome-icon :icon="['fas', 'wind']" class="text-5xl" />
+					</div>
+				</div>
+			</div>
+			<div
+				class="bg-dark-black200/80 px-6 py-4 rounded-lg flex justify-center items-center"
+			>
+				<div class="flex justify-between items-center gap-10 w-full">
+					<div class="whitespace-nowrap">
+						<div class="text-2xl">日照</div>
+						<div class="text-3xl mt-4 text-dark-yellow200 font-bold">
+							{{ realtimeStatus[5].generating.toFixed(2) }}
+						</div>
+						<div class="text-sm">( W/m<sup>2</sup> )</div>
+					</div>
+					<div>
+						<font-awesome-icon :icon="['far', 'sun']" class="text-5xl" />
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

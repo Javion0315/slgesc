@@ -93,15 +93,14 @@ export default {
 	mounted() {
 		let titleList = [
 			{ name: "資安暨智慧科技研發大樓", code: "RdCenter" },
-			{ name: "示範場域", code: "ITRI" },
-			{ name: "會展中心", code: "exhibition" },
-			{ name: "工研院K區", code: "K" },
+			{ name: "綠能科技示範場域", code: "ITRI" },
+			{ name: "大臺南會展中心", code: "exhibition" },
+			{ name: "工研院 k棟示範場所", code: "K" },
 			{ name: "中研院南部院區", code: "E" },
 			{ name: "臺灣智駕測試實驗室", code: "C1" },
 			{ name: "智慧綠能循環住宅園區", code: "住" },
-			{ name: "產業專用區", code: "B" },
 		];
-		let idList = ["C", "D", "A", "K", "E", "C1", "住", "B"];
+		let idList = ["C", "D", "A", "K", "E", "C1", "住"];
 		getConsumptionCompare().then((res) => {
 			let data = res.data.consuming; // 用電量
 			let last = data.lastMonth;
@@ -110,11 +109,13 @@ export default {
 			if (data) {
 				// RdCenter: 資安暨智慧科技研發專區, ITRI: 綠能科技示範場域, Exhibition: 會展中心
 				titleList.forEach((item, index) => {
+					let lastMonth = last[item.code];
+					let thisMonth = thisVal[item.code];
 					let value = {
 						ID: idList[index],
 						area: item.name,
-						lastMonth: last[item.code] || "N/A",
-						thisMonth: thisVal[item.code] || "N/A",
+						lastMonth: lastMonth !== undefined ? lastMonth.toFixed(2) : "N/A",
+						thisMonth: thisMonth !== undefined ? thisMonth.toFixed(2) : "N/A",
 					};
 					let thisMonthItem = thisVal[item.code];
 					if (thisMonthItem !== undefined) {
@@ -134,8 +135,8 @@ export default {
 			this.tableData.forEach((item) => {
 				let lastMonth = item.lastMonth === "N/A" ? 0 : item.lastMonth;
 				let thisMonth = item.thisMonth === "N/A" ? 0 : item.thisMonth;
-				let lastData = [item.ID, lastMonth];
-				let thisData = [item.ID, thisMonth];
+				let lastData = [item.ID, Number(lastMonth)];
+				let thisData = [item.ID, Number(thisMonth)];
 				lastFormatSeries.push(lastData);
 				thisFormatSeries.push(thisData);
 			});
