@@ -1,7 +1,10 @@
 <template>
 	<div v-if="desc">
 		<CommonLoading v-if="isLoading" />
-		<!-- <div class="bg-dark-black200/80 px-6 py-4 rounded-lg">
+		<div
+			class="bg-dark-black200/80 px-6 py-4 rounded-lg mt-4"
+			v-if="$route.name === 'index'"
+		>
 			<div class="text-2xl">
 				{{ locat }}
 			</div>
@@ -32,8 +35,8 @@
 					{{ realtimeStatus[5].generating.toFixed(2) }} ( W/m<sup>2</sup> )
 				</span>
 			</div>
-		</div> -->
-		<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-1">
+		</div>
+		<div class="grid grid-cols-4 gap-4 max-lg:grid-cols-1" v-else>
 			<div class="bg-dark-black200/80 px-6 py-4 rounded-lg">
 				<div class="flex justify-between items-center gap-10">
 					<div class="whitespace-nowrap">

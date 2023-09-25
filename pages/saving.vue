@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { getRealtimeStatus } from "~/api/main";
+import { getRealtimeStatus, getPowerYearSummary } from "~/api/main";
 
 export default {
 	data() {
@@ -49,13 +49,25 @@ export default {
 			consumingTotal: 0,
 			imageLoaded: true,
 			isLoading: true,
+			carbon: 0,
 		};
 	},
 	watch: {
 		consumingTotal(newVal, oldVal) {
+			this.carbon = 0;
 			if (newVal !== oldVal) {
 				this.consumingTotal = newVal;
-				this.getData();
+				let year = this.$moment().year();
+				// 每年減碳量(t) = 每年發電量(kWh) * 0.495/1000
+				getPowerYearSummary(year).then((res) => {
+					let data = res.data;
+					if (data) {
+						data.forEach((val) => {
+							this.carbon += val.generating;
+						});
+						this.getData();
+					}
+				});
 			}
 		},
 	},
@@ -103,7 +115,7 @@ export default {
 						{
 							img: "CO2",
 							content: `月減碳量 <br /> <span class="text-2xl text-dark-yellow200 font-bold">
-              55,648 </span>(kg-CO2/度)`,
+              ${((this.carbon * 0.495) / 1000).toFixed(2)} </span>(kg-CO2/度)`,
 						},
 					];
 				}

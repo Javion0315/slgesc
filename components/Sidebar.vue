@@ -42,6 +42,11 @@ export default {
 				},
 				{ label: "節電成效", value: "saving", icon: ["fas", "battery-full"] },
 				{ label: "友善連結", value: "link", icon: ["fas", "link"] },
+				{
+					label: "共桿",
+					value: "commonPole",
+					icon: ["fas", "tower-observation"],
+				},
 			],
 		};
 	},
