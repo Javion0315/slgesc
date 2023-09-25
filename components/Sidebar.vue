@@ -55,7 +55,7 @@ export default {
 	},
 	methods: {
 		goPath(item) {
-			if (window.innerWidth <= 840) {
+			if (window.innerWidth <= 1080) {
 				this.$store.dispatch("setMenu", false);
 			}
 			this.menuActived = item.value;

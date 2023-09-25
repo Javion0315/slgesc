@@ -14,7 +14,7 @@
 			</div>
 			<!-- D -->
 			<div
-				class="absolute text-lg font-bold top-[34%] right-[8%] max-lg:text-xs max-2xl:text-base"
+				class="absolute text-lg font-bold top-[33.3%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
 				{{ tableData[1].generating }} KW
 			</div>
@@ -26,7 +26,7 @@
 			</div>
 			<!-- K -->
 			<div
-				class="absolute text-lg font-bold top-[29%] right-[8%] max-lg:text-xs max-2xl:text-base"
+				class="absolute text-lg font-bold top-[28%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
 				{{ tableData[3].generating }} KW
 			</div>

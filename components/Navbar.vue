@@ -24,7 +24,7 @@ export default {
 		...mapMutations(["toggle"]),
 		onScreenResize() {
 			window.addEventListener("resize", () => {
-				if (window.innerWidth <= 840) {
+				if (window.innerWidth <= 1080) {
 					this.$store.dispatch("setMenu", false);
 				} else {
 					this.$store.dispatch("setMenu", true);

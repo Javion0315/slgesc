@@ -2,7 +2,7 @@
 	<div class="bg-dark-black200/80 p-4 rounded-lg mt-4">
 		<CommonLoading v-if="isLoading" />
 		<highchart
-			class="h-[400px]"
+			class="h-[400px] relative left-1/2 transform -translate-x-1/2"
 			:options="chartOptions"
 			v-if="chartOptions.series"
 		></highchart>

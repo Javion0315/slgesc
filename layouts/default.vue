@@ -31,7 +31,7 @@ export default {
 	},
 	mounted() {
 		this.windowWidth = window.innerWidth;
-		if (this.windowWidth <= 840) {
+		if (this.windowWidth <= 1080) {
 			this.$store.dispatch("setMenu", false);
 		}
 		window.addEventListener("resize", () => {

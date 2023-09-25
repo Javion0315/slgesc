@@ -59,45 +59,45 @@
 			<div
 				class="bg-dark-black200/80 px-6 py-4 rounded-lg flex justify-center items-center"
 			>
-				<div class="flex justify-between items-center gap-10 w-full">
+				<div class="flex justify-between items-center gap-6 w-full">
 					<div class="whitespace-nowrap">
-						<div class="text-2xl">相對濕度</div>
-						<div class="text-3xl mt-4">{{ rain }}%</div>
+						<div class="text-xl">相對濕度</div>
+						<div class="text-3xl mt-3">{{ rain }}%</div>
 					</div>
 					<div>
-						<font-awesome-icon :icon="['fas', 'cloud-rain']" class="text-5xl" />
+						<font-awesome-icon :icon="['fas', 'cloud-rain']" class="text-4xl" />
 					</div>
 				</div>
 			</div>
 			<div
 				class="bg-dark-black200/80 px-6 py-4 rounded-lg flex justify-center items-center"
 			>
-				<div class="flex justify-between items-center gap-10 w-full">
+				<div class="flex justify-between items-center gap-6 w-full">
 					<div class="whitespace-nowrap">
-						<div class="text-2xl">風向/風速</div>
+						<div class="text-xl">風向/風速</div>
 						<div class="text-2xl mt-4">
 							{{ wind }}
 							<div class="text-sm">({{ speed }})</div>
 						</div>
 					</div>
 					<div>
-						<font-awesome-icon :icon="['fas', 'wind']" class="text-5xl" />
+						<font-awesome-icon :icon="['fas', 'wind']" class="text-4xl" />
 					</div>
 				</div>
 			</div>
 			<div
 				class="bg-dark-black200/80 px-6 py-4 rounded-lg flex justify-center items-center"
 			>
-				<div class="flex justify-between items-center gap-10 w-full">
+				<div class="flex justify-between items-center gap-6 w-full">
 					<div class="whitespace-nowrap">
-						<div class="text-2xl">日照</div>
+						<div class="text-xl">日照</div>
 						<div class="text-3xl mt-4 text-dark-yellow200 font-bold">
 							{{ realtimeStatus[5].generating.toFixed(2) }}
 						</div>
 						<div class="text-sm">( W/m<sup>2</sup> )</div>
 					</div>
 					<div>
-						<font-awesome-icon :icon="['far', 'sun']" class="text-5xl" />
+						<font-awesome-icon :icon="['far', 'sun']" class="text-4xl" />
 					</div>
 				</div>
 			</div>
