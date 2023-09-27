@@ -3,7 +3,7 @@
 		class="bg-dark-black200/80 p-4 rounded-lg text-neutral-100 mt-4"
 		v-if="tableData[0]"
 	>
-		<div class="text-2xl text-center font-bold mb-7">區域用電概要</div>
+		<div class="text-2xl text-center font-bold mb-7">區域發用電概要</div>
 		<!-- <img class="m-auto w-11/12" src="@/assets/images/3DMap.png" alt="3DMap" /> -->
 		<div class="relative" v-cloak>
 			<!-- C -->
@@ -54,12 +54,14 @@
 				alt="3DMap"
 			/>
 		</div>
-
-		<CommonTable :th-list="thList" :table-data="tableData" />
+		<div>
+			<CommonTable :th-list="thList" :table-data="tableData" />
+		</div>
 	</div>
 </template>
 
 <script>
+import { getPowerMonthSummary } from "~/api/main";
 export default {
 	props: {
 		realtimeStatus: {
@@ -73,13 +75,19 @@ export default {
 				{ label: "編號", value: "ID" },
 				{ label: "單位名稱", value: "name" },
 				{ label: "即時發電量", value: "generating" },
+				{ label: "最高發電量", value: "maxGenerating" },
+				{ label: "最高用電量", value: "maxConsuming" },
+				{ label: "平均發電量", value: "avgGenerating" },
+				{ label: "平均用電量", value: "avgConsuming" },
 				{ label: "用電量", value: "consuming" },
 				{ label: "狀態", value: "status" },
 			],
 			tableData: [],
+			SummaryData: [],
 		};
 	},
 	mounted() {
+		this.getSummary();
 		// 用電量 consuming
 		setTimeout(() => {
 			this.getData();
@@ -127,6 +135,22 @@ export default {
 						((item.consuming / consumingList[idx]) * 100).toFixed(0) > 100
 							? 100
 							: ((item.consuming / consumingList[idx]) * 100).toFixed(0),
+					maxGenerating:
+						this.SummaryData[0].data[idx] !== undefined
+							? this.SummaryData[0].data[idx].toFixed(2)
+							: 0,
+					maxConsuming:
+						this.SummaryData[1].data[idx] !== undefined
+							? this.SummaryData[1].data[idx].toFixed(2)
+							: 0,
+					avgGenerating:
+						this.SummaryData[2].data[idx] !== undefined
+							? this.SummaryData[2].data[idx].toFixed(2)
+							: 0,
+					avgConsuming:
+						this.SummaryData[3].data[idx] !== undefined
+							? this.SummaryData[3].data[idx].toFixed(2)
+							: 0,
 					status: "正常",
 					theme: colorList[idx],
 				};
@@ -142,6 +166,37 @@ export default {
 			// 	};
 			// 	this.tableData.push(value);
 			// }
+		},
+		getSummary() {
+			let year = this.$moment().year();
+			let month = this.$moment().format("M");
+			this.isLoading = true;
+			getPowerMonthSummary(year, month)
+				.then((res) => {
+					let data = res.data;
+					let nameList = [
+						"最高發電量",
+						"最高用電量",
+						"平均發電量",
+						"平均用電量",
+					];
+
+					if (data) {
+						const names = [
+							"maxGenerating",
+							"maxConsuming",
+							"avgGenerating",
+							"avgConsuming",
+						];
+						this.SummaryData = names.map((name, idx) => ({
+							name: nameList[idx],
+							data: data.map((item) => item[name]),
+						}));
+					}
+				})
+				.finally(() => {
+					this.isLoading = false;
+				});
 		},
 	},
 };

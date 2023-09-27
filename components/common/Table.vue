@@ -1,11 +1,11 @@
 <template>
-	<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+	<div class="mx-4 max-sm:-mx-8 px-4 max-sm:px-8 py-4 overflow-x-auto">
 		<div class="inline-block min-w-full shadow-md overflow-hidden">
 			<table class="min-w-full leading-normal max-sm:hidden">
 				<thead>
 					<tr>
 						<th
-							class="px-5 py-2 border-b-2 border-gray-600 bg-dark text-left text-base font-semibold text-neutral-300 uppercase tracking-wider"
+							class="px-5 py-2 border-b-2 border-gray-600 bg-dark text-left text-base font-semibold text-neutral-300 uppercase tracking-wider whitespace-nowrap"
 							v-for="item in thList"
 							:key="item.value"
 						>
@@ -15,7 +15,9 @@
 				</thead>
 				<tbody>
 					<tr v-for="(item, index) in tableData" :key="index">
-						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base whitespace-nowrap"
+						>
 							{{ item.ID }}
 						</td>
 						<td
@@ -24,13 +26,36 @@
 							{{ item.name }}
 						</td>
 						<td
-							class="px-5 py-2 border-b border-gray-600 bg-dark text-xl text-dark-yellow200 font-bold"
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-xl text-dark-yellow200 font-bold whitespace-nowrap"
 						>
 							{{ item.generating }}
 						</td>
-						<td class="px-5 py-2 border-b border-gray-600 bg-dark text-base">
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base font-bold whitespace-nowrap"
+						>
+							{{ item.maxGenerating }}
+						</td>
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base font-bold whitespace-nowrap"
+						>
+							{{ item.maxConsuming }}
+						</td>
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base font-bold whitespace-nowrap"
+						>
+							{{ item.avgGenerating }}
+						</td>
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base font-bold whitespace-nowrap"
+						>
+							{{ item.avgConsuming }}
+						</td>
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-base whitespace-nowrap w-full"
+						>
 							<!-- 即時用電量 (RealtimeStatus)/各區契約用電量 -->
 							<CommonProgressBar
+								class="w-40"
 								:is-show-title="false"
 								:percent="item.consuming"
 								:theme="item.theme"
@@ -70,6 +95,18 @@
 					</div>
 					<div>
 						用電量 <span>{{ val.consuming }}</span>
+					</div>
+					<div>
+						最高發電量 <span>{{ val.maxGenerating }}</span>
+					</div>
+					<div>
+						用最高用電量電量 <span>{{ val.maxConsuming }}</span>
+					</div>
+					<div>
+						平均發電量 <span>{{ val.avgGenerating }}</span>
+					</div>
+					<div>
+						平均用電量 <span>{{ val.avgConsuming }}</span>
 					</div>
 					<div>
 						狀態
