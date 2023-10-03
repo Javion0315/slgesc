@@ -40,13 +40,13 @@
 			<div
 				class="absolute text-lg font-bold top-[29%] right-[45%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[5].generating }} KW
+				{{ tableData[6].generating }} KW
 			</div>
 			<!-- 住 -->
 			<div
 				class="absolute text-lg font-bold top-[6%] right-[41%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[6].generating }} KW
+				{{ tableData[5].generating }} KW
 			</div>
 			<img
 				class="m-auto w-11/12"
@@ -103,16 +103,15 @@ export default {
 			// 住區  智慧綠能循環住宅園區
 			// K棟  工研院k棟示範場所
 			let titleList = [
-				"資安暨智慧科技研發大樓",
-				"綠能科技示範場域",
-				"大臺南會展中心",
-				"工研院 k棟示範場所",
-				"中研院南部院區",
-				"臺灣智駕測試實驗室",
-				"智慧綠能循環住宅園區",
-				"產業專用區",
+				{ name: "資安暨智慧科技研發大樓", code: "RdCenter" },
+				{ name: "綠能科技示範場域", code: "ITRI" },
+				{ name: "大臺南會展中心", code: "exhibition" },
+				{ name: "工研院 k棟示範場所", code: "K" },
+				{ name: "中研院南部院區", code: "E" },
+				{ name: "智慧綠能循環住宅園區", code: "R" },
+				{ name: "臺灣智駕測試實驗室", code: "C1" },
 			];
-			let idList = ["C區", "D區", "A區", "K棟", "E區", "C1區", "住區", "B"];
+			let idList = ["C區", "D區", "A區", "K棟", "E區", "住區", "C1區"];
 			let colorList = [
 				"#4F6947",
 				"#856C2D",
@@ -124,37 +123,42 @@ export default {
 				"#483F60",
 			];
 			let consumingList = [790, 1000, 1200, 790, 5900, 150, 200, 0];
-			this.realtimeStatus.forEach((item, idx) => {
+			let removeSL = this.realtimeStatus.filter(
+				(entry) => entry.monitorID !== 6
+			);
+			removeSL.forEach((item, idx) => {
 				// 即時用電量 (RealtimeStatus)/各區契約用電量
 				// generating: 發電量
-				let value = {
-					ID: idList[idx],
-					name: titleList[idx],
-					generating: item.generating.toFixed(2),
-					consuming:
-						((item.consuming / consumingList[idx]) * 100).toFixed(0) > 100
-							? 100
-							: ((item.consuming / consumingList[idx]) * 100).toFixed(0),
-					maxGenerating:
-						this.SummaryData[0].data[idx] !== undefined
-							? this.SummaryData[0].data[idx].toFixed(2)
-							: 0,
-					maxConsuming:
-						this.SummaryData[1].data[idx] !== undefined
-							? this.SummaryData[1].data[idx].toFixed(2)
-							: 0,
-					avgGenerating:
-						this.SummaryData[2].data[idx] !== undefined
-							? this.SummaryData[2].data[idx].toFixed(2)
-							: 0,
-					avgConsuming:
-						this.SummaryData[3].data[idx] !== undefined
-							? this.SummaryData[3].data[idx].toFixed(2)
-							: 0,
-					status: "正常",
-					theme: colorList[idx],
-				};
-				this.tableData.push(value);
+				if (item.name === titleList[idx].code) {
+					let value = {
+						ID: idList[idx],
+						name: titleList[idx].name,
+						generating: item.generating.toFixed(2),
+						consuming:
+							((item.consuming / consumingList[idx]) * 100).toFixed(0) > 100
+								? 100
+								: ((item.consuming / consumingList[idx]) * 100).toFixed(0),
+						maxGenerating:
+							this.SummaryData[0].data[idx] !== undefined
+								? this.SummaryData[0].data[idx].toFixed(2)
+								: 0,
+						maxConsuming:
+							this.SummaryData[1].data[idx] !== undefined
+								? this.SummaryData[1].data[idx].toFixed(2)
+								: 0,
+						avgGenerating:
+							this.SummaryData[2].data[idx] !== undefined
+								? this.SummaryData[2].data[idx].toFixed(2)
+								: 0,
+						avgConsuming:
+							this.SummaryData[3].data[idx] !== undefined
+								? this.SummaryData[3].data[idx].toFixed(2)
+								: 0,
+						status: "正常",
+						theme: colorList[idx],
+					};
+					this.tableData.push(value);
+				}
 			});
 			// for (let i = 7; i < titleList.length; i++) {
 			// 	let value = {

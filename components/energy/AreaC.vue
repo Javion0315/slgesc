@@ -4,7 +4,7 @@
 		<div
 			class="text-2xl text-dark-yellow200 font-bold text-center border-b-2 border-gray-600 p-4"
 		>
-			C 資安暨智慧科技研發大樓
+			C區 資安暨智慧科技研發大樓
 		</div>
 		<div class="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-lg:gap-0 mt-4">
 			<highchart :options="chartOptions" v-if="chartOptions.series"></highchart>

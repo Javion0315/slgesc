@@ -6,6 +6,8 @@
 			<energyAreaA :realtime-status="realtimeStatus" />
 			<energyAreaK :realtime-status="realtimeStatus" />
 			<energyAreaE :realtime-status="realtimeStatus" />
+			<energyAreaR :realtime-status="realtimeStatus" />
+			<energyAreaC1 :realtime-status="realtimeStatus" />
 		</div>
 	</div>
 </template>

@@ -35,14 +35,13 @@ export default {
 	methods: {
 		getData() {
 			let titleList = [
-				"資安暨智慧科技研發大樓(C)",
-				"綠能科技示範場域(D)",
-				"大臺南會展中心(A)",
-				"工研院 k棟示範場所(K)",
-				"中研院南部院區(E)",
-				"臺灣智駕測試實驗室(C1)",
-				"智慧綠能循環住宅園區(住)",
-				"產業專用區",
+				{ name: "資安暨智慧科技研發大樓(C)", code: "RdCenter" },
+				{ name: "綠能科技示範場域(D)", code: "ITRI" },
+				{ name: "大臺南會展中心(A)", code: "exhibition" },
+				{ name: "工研院 k棟示範場所(K)", code: "K" },
+				{ name: "中研院南部院區(E)", code: "E" },
+				{ name: "智慧綠能循環住宅園區(住)", code: "R" },
+				{ name: "臺灣智駕測試實驗室(C1)", code: "C1" },
 			];
 			let colorList = [
 				"#4F6947",
@@ -54,11 +53,12 @@ export default {
 				"#6D3265",
 				"#483F60",
 			];
-
-			this.realtimeStatus.forEach((item, index) => {
-				// if (index < 5) {
+			let removeSL = this.realtimeStatus.filter(
+				(entry) => entry.monitorID !== 6
+			);
+			removeSL.forEach((item, index) => {
 				let value = {
-					title: titleList[index],
+					title: titleList[index].name,
 					theme: colorList[index],
 					consuming:
 						item.generating === 0 && item.consuming === 0
@@ -70,7 +70,6 @@ export default {
 									.toString(),
 				};
 				this.list.push(value);
-				// }
 			});
 		},
 	},

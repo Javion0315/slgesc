@@ -42,6 +42,11 @@
 						>
 							{{ item.thisMonth }}
 						</td>
+						<td
+							class="px-5 py-2 border-b border-gray-600 bg-dark text-lg text-dark-yellow200 font-bold"
+						>
+							{{ item.saving }}
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -58,13 +63,16 @@
 						單位名稱 <span>{{ val.area }}</span>
 					</div>
 					<div>
-						去年同期度數 <span>{{ val.lastMonth }}</span>
+						上月同期度數 <span>{{ val.lastMonth }}</span>
 					</div>
 					<div>
 						本期用電度數
 						<span class="text-2xl text-dark-yellow200 font-bold">{{
 							val.thisMonth
 						}}</span>
+					</div>
+					<div>
+						節電率 <span>{{ val.saving }}</span>
 					</div>
 				</div>
 			</div>
@@ -73,7 +81,7 @@
 </template>
 
 <script>
-import { getConsumptionCompare } from "~/api/main";
+import { getConsumptionCompare, getPowerYearSummary } from "~/api/main";
 
 export default {
 	data() {
@@ -84,51 +92,98 @@ export default {
 			thList: [
 				{ label: "編號", value: "ID" },
 				{ label: "場館區域", value: "area" },
-				{ label: "去年同期度數", value: "lastMonth" },
+				{ label: "上月同期度數", value: "lastMonth" },
 				{ label: "本期用電度數", value: "thisMonth" },
+				{ label: "節電率", value: "saving" },
 			],
 			tableData: [],
+			lastYearList: [],
+			thisYearList: [],
 		};
 	},
 	mounted() {
-		let titleList = [
-			{ name: "資安暨智慧科技研發大樓", code: "RdCenter" },
-			{ name: "綠能科技示範場域", code: "ITRI" },
-			{ name: "大臺南會展中心", code: "exhibition" },
-			{ name: "工研院 k棟示範場所", code: "K" },
-			{ name: "中研院南部院區", code: "E" },
-			{ name: "臺灣智駕測試實驗室", code: "C1" },
-			{ name: "智慧綠能循環住宅園區", code: "住" },
-		];
-		let idList = ["C", "D", "A", "K", "E", "C1", "住"];
-		getConsumptionCompare().then((res) => {
-			let data = res.data.consuming; // 用電量
-			let last = data.lastMonth;
-			let thisMonthTotal = 0;
-			let thisVal = data.thisMonth;
+		let year = this.$moment().year();
+		let lastYear = this.$moment().year() - 1;
+
+		getPowerYearSummary(year).then((res) => {
+			let data = res.data;
 			if (data) {
-				// RdCenter: 資安暨智慧科技研發專區, ITRI: 綠能科技示範場域, Exhibition: 會展中心
-				titleList.forEach((item, index) => {
-					let lastMonth = last[item.code];
-					let thisMonth = thisVal[item.code];
-					let value = {
-						ID: idList[index],
-						area: item.name,
-						lastMonth: lastMonth !== undefined ? lastMonth.toFixed(2) : "N/A",
-						thisMonth: thisMonth !== undefined ? thisMonth.toFixed(2) : "N/A",
-					};
-					let thisMonthItem = thisVal[item.code];
-					if (thisMonthItem !== undefined) {
-						thisMonthTotal += thisVal[item.code];
+				this.thisYearList = data.map((item, idx) => {
+					if (idx !== 5) {
+						return item.consuming;
+					} else {
+						return 0;
 					}
-					this.tableData.push(value);
 				});
-				this.getChart();
-				this.$emit("consuming-total", thisMonthTotal);
+				getPowerYearSummary(lastYear).then((res) => {
+					let data = res.data;
+					if (data) {
+						this.lastYearList = data.map((item, idx) => {
+							if (idx !== 5) {
+								return item.consuming;
+							} else {
+								return 0;
+							}
+						});
+						this.compare();
+					}
+				});
 			}
 		});
 	},
 	methods: {
+		compare() {
+			let titleList = [
+				{ name: "資安暨智慧科技研發大樓", code: "RdCenter" },
+				{ name: "綠能科技示範場域", code: "ITRI" },
+				{ name: "大臺南會展中心", code: "exhibition" },
+				{ name: "工研院 k棟示範場所", code: "K" },
+				{ name: "中研院南部院區", code: "E" },
+				{ name: "智慧綠能循環住宅園區", code: "R" },
+				{ name: "臺灣智駕測試實驗室", code: "C1" },
+			];
+			let idList = ["C", "D", "A", "K", "E", "R", "C1"];
+			getConsumptionCompare().then((res) => {
+				let data = res.data.consuming; // 用電量
+				let last = data.lastMonth;
+				let thisMonthTotal = 0;
+				let thisVal = data.thisMonth;
+				if (data) {
+					// RdCenter: 資安暨智慧科技研發專區, ITRI: 綠能科技示範場域, Exhibition: 會展中心
+					// 節電率 = (前一年同期用電量/計畫執行期間用電量)/前一年用電量 * 100%
+					titleList.forEach((item, index) => {
+						let lastMonth = last[item.code];
+						let thisMonth = thisVal[item.code];
+						// let lastMonth = this.lastYearList[index];
+						// let thisMonth = this.thisYearList[index];
+						let value = {
+							ID: idList[index],
+							area: item.name,
+							lastMonth: lastMonth !== undefined ? lastMonth.toFixed(2) : "N/A",
+							thisMonth: thisMonth !== undefined ? thisMonth.toFixed(2) : "N/A",
+							saving: isNaN(
+								this.lastYearList[index] / thisMonth / this.lastYearList[index]
+							)
+								? "N/A"
+								: (
+										(this.lastYearList[index] /
+											thisMonth /
+											this.lastYearList[index]) *
+										100
+								  ).toFixed(2) + "%",
+						};
+
+						let thisMonthItem = thisVal[item.code];
+						if (thisMonthItem !== undefined) {
+							thisMonthTotal += thisVal[item.code];
+						}
+						this.tableData.push(value);
+					});
+					this.getChart();
+					this.$emit("consuming-total", thisMonthTotal);
+				}
+			});
+		},
 		getChart() {
 			let lastFormatSeries = [];
 			let thisFormatSeries = [];
@@ -140,7 +195,7 @@ export default {
 				lastFormatSeries.push(lastData);
 				thisFormatSeries.push(thisData);
 			});
-			this.chartOptions = this.chart(lastFormatSeries, "去年同期度數");
+			this.chartOptions = this.chart(lastFormatSeries, "上月同期度數");
 			this.chartThisOptions = this.chart(thisFormatSeries, "本期用電度數");
 		},
 		chart(formatSeries, title) {

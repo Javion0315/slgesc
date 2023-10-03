@@ -1,10 +1,10 @@
 <template>
-	<div class="bg-dark-black200/80 p-1 rounded-lg text-neutral-100 mt-4">
+	<div class="bg-dark-black200/80 p-1 rounded-lg text-neutral-100">
 		<CommonLoading v-if="isLoading" />
 		<div
 			class="text-2xl text-dark-yellow200 font-bold text-center border-b-2 border-gray-600 p-4"
 		>
-			E區 中研院南部院區
+			住區 智慧綠能循環住宅園區
 		</div>
 		<div class="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-lg:gap-0 mt-4">
 			<highchart :options="chartOptions" v-if="chartOptions.series"></highchart>
@@ -49,7 +49,7 @@ export default {
 		getPower() {
 			let start = this.$moment().subtract(1, "days").format("x");
 			let end = this.$moment().format("x");
-			let monitor = "E";
+			let monitor = "R";
 			let monitorType = "generating:storing:consuming";
 			let tableType = "Hour";
 			getHistoryTrend(monitor, monitorType, tableType, start, end)
@@ -75,7 +75,7 @@ export default {
 									fontWeight: "normal",
 								},
 							},
-							colors: ["#483F60", "#385331", "#766210"],
+							colors: ["#88522E", "#813731", "#204C71"],
 							chart: {
 								type: "area",
 								backgroundColor: "transparent",
@@ -147,7 +147,7 @@ export default {
 		getGreenPercent() {
 			let start = this.$moment().subtract(1, "days").format("x");
 			let end = this.$moment().format("x");
-			let monitor = "E";
+			let monitor = "R";
 			let monitorType = "greenPercent";
 			let tableType = "Hour";
 			getHistoryTrend(monitor, monitorType, tableType, start, end)
@@ -173,7 +173,7 @@ export default {
 									fontWeight: "normal",
 								},
 							},
-							colors: ["#813731"],
+							colors: ["#4F6947"],
 							chart: {
 								type: "column",
 								backgroundColor: "transparent",

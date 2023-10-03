@@ -6,6 +6,8 @@
 			<GeneratingAreaA :realtime-status="realtimeStatus" />
 			<GeneratingAreaK :realtime-status="realtimeStatus" />
 			<GeneratingAreaE :realtime-status="realtimeStatus" />
+			<GeneratingAreaR :realtime-status="realtimeStatus" />
+			<GeneratingAreaC1 :realtime-status="realtimeStatus" />
 		</div>
 	</div>
 </template>

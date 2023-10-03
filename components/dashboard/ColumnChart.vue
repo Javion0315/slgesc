@@ -17,6 +17,7 @@ export default {
 		return {
 			chartOptions: {},
 			isLoading: false,
+			savingList: [],
 		};
 	},
 
@@ -31,7 +32,7 @@ export default {
 			getPowerMonthSummary(year, month)
 				.then((res) => {
 					let data = res.data;
-					let categories = ["C區", "D區", "A區", "K棟", "E區", "C1區", "住區"];
+					let categories = ["C區", "D區", "A區", "K棟", "E區", "住區", "C1區"];
 					let nameList = [
 						"最高發電量",
 						"最高用電量",
@@ -47,9 +48,10 @@ export default {
 							"avgGenerating",
 							"avgConsuming",
 						];
+						let removeSL = data.filter((entry) => entry.monitorID !== 6);
 						formatSeries = names.map((name, idx) => ({
 							name: nameList[idx],
-							data: data.map((item) => item[name]),
+							data: removeSL.map((item) => item[name]),
 						}));
 
 						this.chartOptions = {
