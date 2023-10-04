@@ -45,6 +45,13 @@ import { getRealtimeStatus } from "~/api/main";
 export default {
 	data() {
 		return {
+			// A區 大臺南會展中心
+			// C區 資安暨智慧科技研發大樓
+			// D區 綠能科技示範場域
+			// C1區 臺灣智駕測試實驗室
+			// E區  中研院南部院區
+			// 住區  智慧綠能循環住宅園區
+			// K棟  工研院k棟示範場所
 			realtimeStatus: [],
 			isLoading: false,
 			trees: 0,

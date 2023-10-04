@@ -4,7 +4,7 @@
 		<div
 			class="text-2xl text-dark-yellow200 font-bold text-center border-b-2 border-gray-600 p-4"
 		>
-			K棟  工研院k棟示範場所
+			K棟 工研院k棟示範場所
 		</div>
 		<div class="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-lg:gap-0 mt-4">
 			<highchart
@@ -16,6 +16,21 @@
 				v-if="chartGeneratingOptions.series"
 			></highchart>
 		</div>
+		<div
+			class="grid grid-cols-4 gap-4 text-center px-4 max-lg:grid-cols-2 my-4"
+			v-if="powerMonth"
+		>
+			<div
+				class="backdrop-blur-sm bg-white/30 rounded-lg"
+				v-for="(item, idx) in powerMonth.data"
+				:key="idx"
+			>
+				<div>
+					{{ nameList[idx] }}
+				</div>
+				{{ item.toFixed(2) }}
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -25,6 +40,14 @@ import { getHistoryTrend } from "~/api/main";
 export default {
 	props: {
 		realtimeStatus: {
+			type: Array,
+			required: true,
+		},
+		powerMonth: {
+			type: Object,
+			required: true,
+		},
+		nameList: {
 			type: Array,
 			required: true,
 		},

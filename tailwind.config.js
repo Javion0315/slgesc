@@ -47,6 +47,7 @@ module.exports = {
         'tech': "url('@/assets/images/bg.jpg')",
         'sidebar': "url('@/assets/images/sidebar.jpg')",
         'tree': "url('@/assets/images/tree.jpg')",
+        'login': "url('@/assets/images/login.jpg')",
       }
     }
   }

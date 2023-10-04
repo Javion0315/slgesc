@@ -17,6 +17,24 @@
 				<font-awesome-icon :icon="item.icon" size="lg" />
 				<div class="ml-4">{{ item.label }}</div>
 			</div>
+			<div
+				class="backdrop-blur-sm bg-white/30 mt-6 mx-2 rounded-lg px-4 pt-4 pb-6"
+			>
+				<div class="font-bold text-xl">最新消息</div>
+				<div
+					class="border-b border-dark-yellow200 py-2 cursor-pointer hover:text-dark-yellow200"
+					v-for="item in newList"
+					:key="item.title"
+					@click="goNews"
+				>
+					<div
+						class="whitespace-nowrap text-ellipsis overflow-hidden w-full text-base"
+					>
+						{{ item.title }}
+					</div>
+					<div class="text-sm text-slate-800">{{ item.date }}</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -47,6 +65,29 @@ export default {
 					value: "commonPole",
 					icon: ["fas", "tower-observation"],
 				},
+				{
+					label: "分層式架構",
+					value: "login",
+					icon: ["fas", "arrow-right-to-bracket"],
+				},
+			],
+			newList: [
+				{
+					id: 1,
+					title: "「滿意度問卷抽好禮」得獎名單出爐",
+					date: "2023/09/26",
+				},
+				{
+					id: 2,
+					title:
+						"10/13 Keep Going！零信任導入經驗分享與供應鏈資安探討｜沙崙資安研討會",
+					date: "2023/09/22",
+				},
+				{
+					id: 3,
+					title: "智慧科技創意應用競賽 報名邁入倒數",
+					date: "2023/09/22",
+				},
 			],
 		};
 	},
@@ -60,6 +101,9 @@ export default {
 			}
 			this.menuActived = item.value;
 			this.$router.push({ name: item.value });
+		},
+		goNews() {
+			window.open("https://www.ssgesc.tw/#/news", "_blank");
 		},
 	},
 };
