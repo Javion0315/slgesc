@@ -17,9 +17,13 @@
 			></highchart>
 		</div>
 		<div
-			class="grid grid-cols-4 gap-4 text-center px-4 max-lg:grid-cols-2 my-4"
+			class="grid grid-cols-5 gap-4 text-center px-4 max-lg:grid-cols-2 my-4"
 			v-if="powerMonth"
 		>
+			<div class="backdrop-blur-sm bg-white/30 rounded-lg">
+				<div>契約容量</div>
+				799KW
+			</div>
 			<div
 				class="backdrop-blur-sm bg-white/30 rounded-lg"
 				v-for="(item, idx) in powerMonth.data"
@@ -70,7 +74,7 @@ export default {
 		getData() {
 			let data = this.realtimeStatus;
 			if (data) {
-				this.consuming = ((data[4].consuming / (2400 + 3500)) * 100).toFixed(0);
+				this.consuming = ((data[4].consuming / 799) * 100).toFixed(0);
 				this.generating = data[4].generating;
 				this.getConsuming();
 				this.getGenerating();

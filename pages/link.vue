@@ -54,6 +54,11 @@ export default {
 					img: "content",
 					href: "https://www.moeaboe.gov.tw/ecw/populace/content/Content.aspx?menu_id=13178&sub_menu_id=13180",
 				},
+				{
+					id: "ssgesc",
+					img: "ssgesc",
+					href: "https://www.ssgesc.tw/#/home",
+				},
 			],
 		};
 	},
