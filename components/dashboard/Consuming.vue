@@ -10,43 +10,43 @@
 			<div
 				class="absolute text-lg font-bold top-[47.5%] right-[37%] max-2xl:text-base max-lg:text-xs"
 			>
-				{{ tableData[0].generating }} KW
+				{{ tableData[0].generating }} kW
 			</div>
 			<!-- D -->
 			<div
 				class="absolute text-lg font-bold top-[33.3%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[1].generating }} KW
+				{{ tableData[1].generating }} kW
 			</div>
 			<!-- A -->
 			<div
 				class="absolute text-lg font-bold top-[47.5%] left-[15%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[2].generating }} KW
+				{{ tableData[2].generating }} kW
 			</div>
 			<!-- K -->
 			<div
 				class="absolute text-lg font-bold top-[28%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[3].generating }} KW
+				{{ tableData[3].generating }} kW
 			</div>
 			<!-- E -->
 			<div
 				class="absolute text-lg font-bold top-[17.5%] right-[22%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[4].generating }} KW
+				{{ tableData[4].generating }} kW
 			</div>
 			<!-- C1 -->
 			<div
 				class="absolute text-lg font-bold top-[29%] right-[45%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[6].generating }} KW
+				{{ tableData[6].generating }} kW
 			</div>
 			<!-- 住 -->
 			<div
 				class="absolute text-lg font-bold top-[6%] right-[41%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[5].generating }} KW
+				{{ tableData[5].generating }} kW
 			</div>
 			<img
 				class="m-auto w-11/12"
@@ -74,12 +74,12 @@ export default {
 			thList: [
 				{ label: "編號", value: "ID" },
 				{ label: "單位名稱", value: "name" },
-				{ label: "即時發電量", value: "generating" },
-				{ label: "最高發電量", value: "maxGenerating" },
-				{ label: "最高用電量", value: "maxConsuming" },
-				{ label: "平均發電量", value: "avgGenerating" },
-				{ label: "平均用電量", value: "avgConsuming" },
-				{ label: "用電量", value: "consuming" },
+				{ label: "即時發電量(kW)", value: "generating" },
+				{ label: "最高發電量(kW)", value: "maxGenerating" },
+				{ label: "最高用電量(kW)", value: "maxConsuming" },
+				{ label: "平均發電量(kW)", value: "avgGenerating" },
+				{ label: "平均用電量(kW)", value: "avgConsuming" },
+				{ label: "用電量(kW)", value: "consuming" },
 				{ label: "狀態", value: "status" },
 			],
 			tableData: [],
@@ -133,26 +133,26 @@ export default {
 					let value = {
 						ID: idList[idx],
 						name: titleList[idx].name,
-						generating: item.generating.toFixed(2),
+						generating: item.generating.toFixed(0),
 						consuming:
 							((item.consuming / consumingList[idx]) * 100).toFixed(0) > 100
 								? 100
 								: ((item.consuming / consumingList[idx]) * 100).toFixed(0),
 						maxGenerating:
 							this.SummaryData[0].data[idx] !== undefined
-								? this.SummaryData[0].data[idx].toFixed(2)
+								? this.SummaryData[0].data[idx].toFixed(0)
 								: 0,
 						maxConsuming:
 							this.SummaryData[1].data[idx] !== undefined
-								? this.SummaryData[1].data[idx].toFixed(2)
+								? this.SummaryData[1].data[idx].toFixed(0)
 								: 0,
 						avgGenerating:
 							this.SummaryData[2].data[idx] !== undefined
-								? this.SummaryData[2].data[idx].toFixed(2)
+								? this.SummaryData[2].data[idx].toFixed(0)
 								: 0,
 						avgConsuming:
 							this.SummaryData[3].data[idx] !== undefined
-								? this.SummaryData[3].data[idx].toFixed(2)
+								? this.SummaryData[3].data[idx].toFixed(0)
 								: 0,
 						status: "正常",
 						theme: colorList[idx],

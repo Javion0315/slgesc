@@ -100,7 +100,7 @@ export default {
 							},
 							yAxis: {
 								title: {
-									text: "KW",
+									text: "kW",
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",

@@ -18,7 +18,7 @@
 				<thead>
 					<tr>
 						<th
-							class="px-5 py-2 border-b-2 border-gray-600 bg-dark text-left text-base font-semibold text-neutral-300 uppercase tracking-wider"
+							class="px-5 py-2 border-b-2 border-gray-600 bg-dark text-left text-base font-semibold text-neutral-300 normal-case tracking-wider"
 							v-for="item in thList"
 							:key="item.value"
 						>
@@ -63,10 +63,10 @@
 						單位名稱 <span>{{ val.area }}</span>
 					</div>
 					<div>
-						上月同期度數 <span>{{ val.lastMonth }}</span>
+						上月平均同期度數(kW) <span>{{ val.lastMonth }}</span>
 					</div>
 					<div>
-						本期用電度數
+						本期平均用電度數(kW)
 						<span class="text-2xl text-dark-yellow200 font-bold">{{
 							val.thisMonth
 						}}</span>
@@ -92,8 +92,8 @@ export default {
 			thList: [
 				{ label: "編號", value: "ID" },
 				{ label: "場館區域", value: "area" },
-				{ label: "上月同期度數", value: "lastMonth" },
-				{ label: "本期用電度數", value: "thisMonth" },
+				{ label: "上月平均同期度數(kW)", value: "lastMonth" },
+				{ label: "本期平均用電度數(kW)", value: "thisMonth" },
 				{ label: "節電率", value: "saving" },
 			],
 			tableData: [],
@@ -159,8 +159,18 @@ export default {
 						let value = {
 							ID: idList[index],
 							area: item.name,
-							lastMonth: lastMonth !== undefined ? lastMonth.toFixed(2) : "N/A",
-							thisMonth: thisMonth !== undefined ? thisMonth.toFixed(2) : "N/A",
+							lastMonth:
+								lastMonth === undefined
+									? "N/A"
+									: idList[index] === "K"
+									? lastMonth.toFixed(2)
+									: lastMonth.toFixed(0),
+							thisMonth:
+								thisMonth === undefined
+									? "N/A"
+									: idList[index] === "K"
+									? thisMonth.toFixed(2)
+									: thisMonth.toFixed(0),
 							saving: isNaN(
 								this.lastYearList[index] / thisMonth / this.lastYearList[index]
 							)
@@ -195,8 +205,11 @@ export default {
 				lastFormatSeries.push(lastData);
 				thisFormatSeries.push(thisData);
 			});
-			this.chartOptions = this.chart(lastFormatSeries, "上月同期度數");
-			this.chartThisOptions = this.chart(thisFormatSeries, "本期用電度數");
+			this.chartOptions = this.chart(lastFormatSeries, "上月平均同期度數(kW)");
+			this.chartThisOptions = this.chart(
+				thisFormatSeries,
+				"本期平均用電度數(kW)"
+			);
 		},
 		chart(formatSeries, title) {
 			return {

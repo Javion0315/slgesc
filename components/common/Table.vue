@@ -5,7 +5,7 @@
 				<thead>
 					<tr>
 						<th
-							class="px-5 py-2 border-b-2 border-gray-600 bg-dark text-left text-base font-semibold text-neutral-300 uppercase tracking-wider whitespace-nowrap"
+							class="px-5 py-2 border-b-2 border-gray-600 bg-dark text-left text-base font-semibold text-neutral-300 tracking-wider whitespace-nowrap normal-case"
 							v-for="item in thList"
 							:key="item.value"
 						>
@@ -88,25 +88,25 @@
 						單位名稱 <span>{{ val.name }}</span>
 					</div>
 					<div>
-						即時發電量
+						即時發電量(kW)
 						<span class="text-lg text-dark-yellow200 font-bold">{{
 							val.generating
 						}}</span>
 					</div>
 					<div>
-						用電量 <span>{{ val.consuming }}</span>
+						用電量(kW) <span>{{ val.consuming }}</span>
 					</div>
 					<div>
-						最高發電量 <span>{{ val.maxGenerating }}</span>
+						最高發電量(kW) <span>{{ val.maxGenerating }}</span>
 					</div>
 					<div>
-						用最高用電量電量 <span>{{ val.maxConsuming }}</span>
+						用最高用電量電量(kW) <span>{{ val.maxConsuming }}</span>
 					</div>
 					<div>
-						平均發電量 <span>{{ val.avgGenerating }}</span>
+						平均發電量(kW) <span>{{ val.avgGenerating }}</span>
 					</div>
 					<div>
-						平均用電量 <span>{{ val.avgConsuming }}</span>
+						平均用電量(kW) <span>{{ val.avgConsuming }}</span>
 					</div>
 					<div>
 						狀態

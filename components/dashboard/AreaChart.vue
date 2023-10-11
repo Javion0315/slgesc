@@ -63,7 +63,7 @@ export default {
 							});
 
 							if (formatSeries[i].name === "沙崙區_發電量") {
-								formatSeries[i].name = '日照度';
+								formatSeries[i].name = "日照度";
 								formatSeries[i].type = "spline";
 							} else {
 								formatSeries[i].type = "area";
@@ -124,7 +124,7 @@ export default {
 							},
 							yAxis: {
 								title: {
-									text: "發電量 (KW)",
+									text: "發電量 (kW)",
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",

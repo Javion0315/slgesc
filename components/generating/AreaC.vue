@@ -22,7 +22,7 @@
 		>
 			<div class="backdrop-blur-sm bg-white/30 rounded-lg">
 				<div>契約容量</div>
-				790KW
+				790 kW
 			</div>
 			<div
 				class="backdrop-blur-sm bg-white/30 rounded-lg"
@@ -32,7 +32,7 @@
 				<div>
 					{{ nameList[idx] }}
 				</div>
-				{{ item.toFixed(2) }}
+				{{ item.toFixed(0) }} kW
 			</div>
 		</div>
 	</div>
@@ -220,7 +220,7 @@ export default {
 							},
 							yAxis: {
 								title: {
-									text: "發電量 (KW)",
+									text: "發電量 (kW)",
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
@@ -244,7 +244,7 @@ export default {
 								// ],
 							},
 							title: {
-								text: `即時發電量 ${this.generating} Kw`,
+								text: `即時發電量 ${this.generating} kW`,
 								style: {
 									color: "#FFF",
 									font: "normal 20px '微軟正黑體'",

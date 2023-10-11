@@ -109,7 +109,7 @@ export default {
 							},
 							yAxis: {
 								title: {
-									text: "電量 (KW)",
+									text: "電量 (kW)",
 									style: {
 										color: "#FFF",
 										font: "normal 16px '微軟正黑體'",
