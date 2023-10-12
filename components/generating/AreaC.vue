@@ -244,7 +244,7 @@ export default {
 								// ],
 							},
 							title: {
-								text: `即時發電量 ${this.generating} kW`,
+								text: `即時發電量 ${this.generating.toFixed(0)} kW`,
 								style: {
 									color: "#FFF",
 									font: "normal 20px '微軟正黑體'",
