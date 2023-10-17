@@ -67,12 +67,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extractCSS: true
+    extractCSS: true,
+    publicPath: '/dist/'
   },
 
   server: {
     host: '0.0.0.0'
   },
 
-  publicPath: '/slgesc/'
+  router: {
+    base: '/dist/' // 指定基本路徑
+  },
+
+  // publicPath: '/slgesc/'
 }
