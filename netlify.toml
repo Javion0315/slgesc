@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/dist/*"
+  to = "/:splat"
+  status = 200
