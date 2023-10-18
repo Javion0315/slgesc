@@ -189,6 +189,9 @@ export default {
 						}
 						this.tableData.push(value);
 					});
+					// 把 K 移到最後
+					let element = this.tableData.splice(3, 1)[0];
+					this.tableData.push(element);
 					this.getChart();
 					this.$emit("consuming-total", thisMonthTotal);
 				}

@@ -32,6 +32,9 @@ export default {
 			getPowerMonthSummary(year, month)
 				.then((res) => {
 					let data = res.data;
+					// 把 K 移到最後
+					let element = data.splice(3, 1)[0];
+					data.push(element);
 					let categories = ["C區", "D區", "A區", "K棟", "E區", "住區", "C1區"];
 					let nameList = [
 						"最高發電量",
@@ -53,6 +56,11 @@ export default {
 							name: nameList[idx],
 							data: removeSL.map((item) => item[name]),
 						}));
+
+						// 把 K 移到最後
+						let category = categories.slice(0, data.length - 1);
+						let k = category.splice(3, 1)[0];
+						category.push(k);
 
 						this.chartOptions = {
 							credits: {
@@ -96,7 +104,7 @@ export default {
 								},
 							},
 							xAxis: {
-								categories: categories.slice(0, data.length),
+								categories: category,
 								crosshair: true,
 								accessibility: {
 									description: "Countries",

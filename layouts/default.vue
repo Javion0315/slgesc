@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="text-white min-h-screen bg-tech bg-no-repeat bg-cover bg-center bg-fixed"
+		class="text-white min-h-screen bg-tech bg-no-repeat bg-cover bg-center bg-fixed bg-black"
 		v-cloak
 	>
 		<div class="backdrop-blur-[1px]">

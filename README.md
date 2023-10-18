@@ -18,3 +18,8 @@ Run `serve`:
 ```bash
 $ yarn run serve
 ```
+
+## Deploy Build Dist
+```bash
+$ yarn run generate
+```

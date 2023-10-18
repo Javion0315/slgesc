@@ -160,16 +160,9 @@ export default {
 					this.tableData.push(value);
 				}
 			});
-			// for (let i = 7; i < titleList.length; i++) {
-			// 	let value = {
-			// 		ID: idList[i],
-			// 		name: titleList[i],
-			// 		consuming: 0,
-			// 		status: "N/A",
-			// 		theme: colorList[i],
-			// 	};
-			// 	this.tableData.push(value);
-			// }
+			// 把 K 移到最後
+			let element = this.tableData.splice(3, 1)[0];
+			this.tableData.push(element);
 		},
 		getSummary() {
 			let year = this.$moment().year();

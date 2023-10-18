@@ -19,12 +19,6 @@
 				:name-list="nameList"
 				v-if="powerMonth[2]"
 			/>
-			<GeneratingAreaK
-				:realtime-status="realtimeStatus"
-				:power-month="powerMonth[3]"
-				:name-list="nameList"
-				v-if="powerMonth[3]"
-			/>
 			<GeneratingAreaE
 				:realtime-status="realtimeStatus"
 				:power-month="powerMonth[4]"
@@ -42,6 +36,12 @@
 				:power-month="powerMonth[6]"
 				:name-list="nameList"
 				v-if="powerMonth[6]"
+			/>
+			<GeneratingAreaK
+				:realtime-status="realtimeStatus"
+				:power-month="powerMonth[3]"
+				:name-list="nameList"
+				v-if="powerMonth[3]"
 			/>
 		</div>
 	</div>

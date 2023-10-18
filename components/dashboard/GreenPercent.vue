@@ -71,6 +71,9 @@ export default {
 				};
 				this.list.push(value);
 			});
+			// 把 K 移到最後
+			let element = this.list.splice(3, 1)[0];
+			this.list.push(element);
 		},
 	},
 };
