@@ -145,7 +145,7 @@ export default {
 						icon: ["fas", "battery-three-quarters"],
 					},
 					{
-						label: "綠能使用率",
+						label: "綠能滲透率",
 						value: ((generating / consuming) * 100).toFixed(0) + " (%)",
 						icon: ["fas", "solar-panel"],
 					},
