@@ -28,25 +28,25 @@
 			<div
 				class="absolute text-lg font-bold top-[28%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[3].generating }} kW
+				{{ tableData[6].generating }} kW
 			</div>
 			<!-- E -->
 			<div
 				class="absolute text-lg font-bold top-[17.5%] right-[22%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[4].generating }} kW
+				{{ tableData[3].generating }} kW
 			</div>
 			<!-- C1 -->
 			<div
 				class="absolute text-lg font-bold top-[29%] right-[45%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[6].generating }} kW
+				{{ tableData[5].generating }} kW
 			</div>
 			<!-- 住 -->
 			<div
 				class="absolute text-lg font-bold top-[6%] right-[41%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[5].generating }} kW
+				{{ tableData[4].generating }} kW
 			</div>
 			<img
 				class="m-auto w-11/12"
