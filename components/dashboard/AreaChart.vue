@@ -46,7 +46,7 @@ export default {
 		getData() {
 			let start = this.$moment().subtract(3, "days").format("x");
 			let end = this.$moment(this.date).format("x");
-			let monitor = "RdCenter:ITRI:exhibition:K:E:SL";
+			let monitor = "RdCenter:ITRI:exhibition:K:E:SL:C1:R";
 			let monitorType = "generating";
 			let tableType = "Min";
 			this.isLoading = true;

@@ -18,22 +18,23 @@
 		</div>
 		<div
 			class="grid grid-cols-5 gap-4 text-center px-4 max-lg:grid-cols-2 my-4"
-			v-if="powerMonth"
 		>
 			<div class="backdrop-blur-sm bg-white/30 rounded-lg">
 				<div>契約容量</div>
 				150 kW
 			</div>
-			<div
-				class="backdrop-blur-sm bg-white/30 rounded-lg"
-				v-for="(item, idx) in powerMonth.data"
-				:key="idx"
-			>
-				<div>
-					{{ nameList[idx] }}
+			<template v-if="powerMonth">
+				<div
+					class="backdrop-blur-sm bg-white/30 rounded-lg"
+					v-for="(item, idx) in powerMonth.data"
+					:key="idx"
+				>
+					<div>
+						{{ nameList[idx] }}
+					</div>
+					{{ item.toFixed(0) }} kW
 				</div>
-				{{ item.toFixed(0) }} kW
-			</div>
+			</template>
 		</div>
 	</div>
 </template>
@@ -49,7 +50,7 @@ export default {
 		},
 		powerMonth: {
 			type: Object,
-			required: true,
+			required: false,
 		},
 		nameList: {
 			type: Array,

@@ -35,7 +35,6 @@
 				:realtime-status="realtimeStatus"
 				:power-month="powerMonth[6]"
 				:name-list="nameList"
-				v-if="powerMonth[6]"
 			/>
 			<GeneratingAreaK
 				:realtime-status="realtimeStatus"
