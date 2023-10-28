@@ -12,11 +12,11 @@
 			>
 				{{ tableData[0].generating }} kW
 			</div>
-			<!-- D -->
+			<!-- K -->
 			<div
-				class="absolute text-lg font-bold top-[33.3%] right-[7%] max-lg:text-xs max-2xl:text-base"
+				class="absolute text-lg font-bold top-[34%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[1].generating }} kW
+				{{ tableData[6].generating }} kW
 			</div>
 			<!-- A -->
 			<div
@@ -24,11 +24,11 @@
 			>
 				{{ tableData[2].generating }} kW
 			</div>
-			<!-- K -->
+			<!-- D -->
 			<div
-				class="absolute text-lg font-bold top-[28%] right-[7%] max-lg:text-xs max-2xl:text-base"
+				class="absolute text-lg font-bold top-[29%] right-[7%] max-lg:text-xs max-2xl:text-base"
 			>
-				{{ tableData[6].generating }} kW
+				{{ tableData[1].generating }} kW
 			</div>
 			<!-- E -->
 			<div
