@@ -127,7 +127,8 @@ export default {
 			if (data) {
 				let generating = 0;
 				let consuming = 0;
-				data.forEach((res) => {
+				let removeSL = data.filter((entry) => entry.monitorID !== 6);
+				removeSL.forEach((res) => {
 					generating += res.generating;
 					consuming += res.consuming;
 				});

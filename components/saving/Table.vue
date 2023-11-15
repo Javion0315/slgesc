@@ -156,6 +156,8 @@ export default {
 						let thisMonth = thisVal[item.code];
 						// let lastMonth = this.lastYearList[index];
 						// let thisMonth = this.thisYearList[index];
+						if (this.lastYearList[index] === undefined)
+							this.lastYearList[index] = 0;
 						let value = {
 							ID: idList[index],
 							area: item.name,
@@ -182,7 +184,6 @@ export default {
 										100
 								  ).toFixed(2) + "%",
 						};
-
 						let thisMonthItem = thisVal[item.code];
 						if (thisMonthItem !== undefined) {
 							thisMonthTotal += thisVal[item.code];
