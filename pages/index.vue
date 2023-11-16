@@ -65,7 +65,8 @@ export default {
 				let data = res.data.summary;
 				if (data) {
 					let generating = 0;
-					data.forEach((res) => {
+					let removeSL = data.filter((entry) => entry.monitorID !== 6);
+					removeSL.forEach((res) => {
 						generating += res.generating;
 					});
 					this.trees = ((generating * 0.495) / 12).toFixed(0);

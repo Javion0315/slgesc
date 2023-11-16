@@ -163,20 +163,20 @@ export default {
 							area: item.name,
 							lastMonth:
 								lastMonth === undefined
-									? "N/A"
+									? "0"
 									: idList[index] === "K"
 									? lastMonth.toFixed(2)
 									: lastMonth.toFixed(0),
 							thisMonth:
 								thisMonth === undefined
-									? "N/A"
+									? "0"
 									: idList[index] === "K"
 									? thisMonth.toFixed(2)
 									: thisMonth.toFixed(0),
 							saving: isNaN(
 								this.lastYearList[index] / thisMonth / this.lastYearList[index]
 							)
-								? "N/A"
+								? "0%"
 								: (
 										(this.lastYearList[index] /
 											thisMonth /
