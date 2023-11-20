@@ -176,7 +176,7 @@ export default {
 							saving: isNaN(
 								this.lastYearList[index] / thisMonth / this.lastYearList[index]
 							)
-								? "0%"
+								? "0.00%"
 								: (
 										(this.lastYearList[index] /
 											thisMonth /
